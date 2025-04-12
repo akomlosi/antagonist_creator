@@ -1,17 +1,18 @@
 import { config } from "../config/config";
 import { generate } from "../utils/antagonist-generator";
+import { useCallback } from "react";
 
 const Hex = ({ num, className, children }) => (
   <div className={`hex-wrapper ${className}`}>
     <span className="title">{children}</span>
-    <svg viewBox="0 0 100 95" class="hex-svg">
+    <svg viewBox="0 0 100 95" className="hex-svg">
       <polygon
         points="50,0 100,25 100,75 50,100 0,75 0,25"
         fill="none"
         stroke="#59b3b7"
-        stroke-width="3"
+        strokeWidth="3"
       />
-      <text x="50%" y="58%" dominant-baseline="middle" text-anchor="middle">
+      <text x="50%" y="58%" dominantBaseline="middle" textAnchor="middle">
         {num}
       </text>
     </svg>
@@ -27,13 +28,19 @@ const BracketedBox = ({ title, children }) => (
   </>
 );
 
-export const Form = () => {
+export const CreatureSheet = () => {
   const { antagonists } = config;
   const critter = generate(antagonists);
+
+  const handleRegenerateClick = useCallback(() => {
+    window.location.reload();
+  }, []);
+
   return (
     <article>
       <div className="div1 text_heading text_highlighted">
-        {critter.difficulty.description}
+        <span className="space-right">{critter.difficulty.description}</span>
+        <span className="neutral">"{critter.name}"</span>
         {critter.difficulty.attack_num === 2 && (
           <div className="danger text_md">
             [Attacks <span className="text_highlighted">2</span> times on its
@@ -149,8 +156,10 @@ export const Form = () => {
         <span className="neutral">{critter.type}</span>
       </div>
       <BracketedBox title={<div>{critter.role}</div>}>
-        {critter.role_properties.map((p) => (
-          <span className="angle-right">{p}</span>
+        {critter.role_properties.map((p, i) => (
+          <span key={`${p}-${i}`} className="angle-right">
+            {p}
+          </span>
         ))}
         <span className="angle-right">{critter.role_properties}</span>
       </BracketedBox>
@@ -158,6 +167,9 @@ export const Form = () => {
         <span className="chevron-right">Size</span>
         <span className="neutral">{critter.size}</span>
       </div>
+      <button onClick={handleRegenerateClick} className="regen_button danger">
+        [regenerate]
+      </button>
     </article>
   );
 };

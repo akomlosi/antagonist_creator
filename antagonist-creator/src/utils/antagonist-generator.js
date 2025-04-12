@@ -19,6 +19,187 @@ function rand(arr) {
   return arr[index];
 }
 
+const creatureNameSyllables = [
+  [
+    "Ael",
+    "Ar",
+    "At",
+    "Af",
+    "Am",
+    "Ain",
+    "Bo",
+    "Baf",
+    "Bet",
+    "Bin",
+    "Buk",
+    "Bon",
+    "Bru",
+    "Cal",
+    "Cor",
+    "Cen",
+    "Col",
+    "De",
+    "Dra",
+    "Din",
+    "Deo",
+    "Dak",
+    "Dot",
+    "Er",
+    "Eo",
+    "Eni",
+    "Eto",
+    "Eal",
+    "Eth",
+    "Emi",
+    "Eos",
+    "Foh",
+    "Fel",
+    "Fan",
+    "Fri",
+    "Fik",
+    "Faw",
+    "Flo",
+    "Gru",
+    "Gon",
+    "Gas",
+    "Gy",
+    "Gli",
+    "Gea",
+    "Got",
+    "Hun",
+    "Hol",
+    "Hra",
+    "Hib",
+    "Had",
+  ],
+  [
+    "Hu",
+    "Hol",
+    "Has",
+    "Hof",
+    "Hev",
+    "Io",
+    "Im",
+    "Ir",
+    "Iok",
+    "Iv",
+    "Ix",
+    "Jo",
+    "Je",
+    "Jun",
+    "Jas",
+    "Jho",
+    "Jen",
+    "Jiv",
+    "Jox",
+    "Jer",
+    "Jis",
+    "Kro",
+    "Ke",
+    "Kal",
+    "Koe",
+    "Klu",
+    "Kyn",
+    "Kva",
+    "Kol",
+    "Kes",
+    "Kut",
+    "Kso",
+    "Kae",
+    "Kib",
+    "Li",
+    "Lon",
+    "Ler",
+    "La",
+    "Loy",
+    "Lun",
+    "Les",
+    "Lam",
+    "Lef",
+    "Luz",
+    "Lop",
+    "Mo",
+    "Met",
+    "Maf",
+    "Mig",
+    "Mox",
+  ],
+  [
+    "Mus",
+    "Myn",
+    "Med",
+    "Mol",
+    "Mec",
+    "Nio",
+    "Nu",
+    "Ner",
+    "Nas",
+    "Or",
+    "Otu",
+    "Owa",
+    "Ogi",
+    "Ofe",
+    "Ovy",
+    "Olo",
+    "Oma",
+    "Pro",
+    "Pem",
+    "Pas",
+    "Pu",
+    "Puc",
+    "Pyf",
+    "Piz",
+    "Qu",
+    "Reo",
+    "Rin",
+    "Ra",
+    "Rol",
+    "Se",
+    "Sov",
+    "Sag",
+    "Siz",
+    "Suf",
+    "To",
+    "Til",
+    "Tra",
+    "Tuv",
+    "Uo",
+    "Un",
+    "Ven",
+    "Vo",
+    "Vas",
+    "Xa",
+    "Xon",
+    "Yeo",
+    "Yl",
+    "Yt",
+    "Zas",
+    "Zo",
+  ],
+];
+
+function generateRandomCreatureName(syllables) {
+  const syllableCount = Math.floor(Math.random() * 3) + 1; // 1 to 3
+  const result = [];
+
+  if (syllableCount >= 1) {
+    result.push(randomFrom(syllables[0]));
+  }
+  if (syllableCount >= 2) {
+    result.push(randomFrom(syllables[1]));
+  }
+  if (syllableCount === 3) {
+    result.push(randomFrom(syllables[2]));
+  }
+
+  return result.join("").toLowerCase();
+}
+
+// Helper: véletlenszerű elem választása egy tömbből
+function randomFrom(array) {
+  return array[Math.floor(Math.random() * array.length)];
+}
+
 const generateDiceRoll = (diceRoll) => {
   const simplePattern = /^(\d+)?([+-])?\(?(\d+)D(\d+)\)?$/i;
 
@@ -134,5 +315,6 @@ export const generate = (antagonists) => {
   );
 
   console.log(generatedConfig);
+  generatedConfig.name = generateRandomCreatureName(creatureNameSyllables);
   return generatedConfig;
 };

@@ -1,10 +1,10 @@
 import "./App.css";
-import { Form } from "./components/form";
+import { CreatureSheet } from "./components/creature-sheet";
 
 function App() {
   return (
     <div className="App">
-      <Form />
+      <CreatureSheet />
     </div>
   );
 }
