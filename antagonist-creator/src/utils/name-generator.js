@@ -160,7 +160,7 @@ const creatureNameSyllables = [
 const rand = (array) => array[Math.floor(Math.random() * array.length)];
 
 export const generateRandomCreatureName = () => {
-  const syllableCount = Math.floor(Math.random() * 3) + 1; // 1 to 3
+  const syllableCount = Math.floor(Math.random() * 3) + 1;
   const result = [];
 
   if (syllableCount >= 1) {

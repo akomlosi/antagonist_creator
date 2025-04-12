@@ -135,7 +135,6 @@ export const generate = (antagonists) => {
     generatedConfig.difficulty
   );
 
-  console.log(generatedConfig);
   generatedConfig.name = generateRandomCreatureName();
   return generatedConfig;
 };
