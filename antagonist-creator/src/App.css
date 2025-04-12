@@ -1,0 +1,245 @@
+body {
+  background-color: #021112;
+  background-image: url("./assets/bg.png");
+  background-size: 100% 100%;   /* torzítás engedélyezve */
+  background-repeat: no-repeat; /* ne ismétlődjön */
+  background-position: center;  /* középre igazítás (opcionális) */
+  text-transform: uppercase;
+  font-family: monospace;
+  height: 100vh;
+}
+
+.App {
+  padding-top: 20px;
+}
+
+.text_heading {
+  font-size: 20px;
+}
+
+.text_highlighted {
+  color: #fff570
+}
+
+.text_lg {
+  font-size: 14px;
+}
+
+.text_md {
+  font-size: 12px;
+}
+
+.text_sm {
+  font-size: 10px;
+}
+
+.text_boxed {
+  border: 1px dashed #3ba8ad3d;
+  width: fit-content;
+  padding: 7px 40px;
+}
+
+article {
+  color: #59b3b7;
+  margin: 0 auto;
+  padding: 0 20px 20px;
+  border-left: 1px dashed #59b3b71f;
+  border-right: 1px dashed #59b3b71f;
+  width: 430px;
+}
+
+div {
+  padding: 2px 0;
+}
+
+.top_block {
+  border-bottom: 1px dashed #59b3b71f;
+  margin-bottom: 18px;
+}
+
+.hex_block {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  text-align: center;
+  justify-items: end;
+  }
+  
+  .hex_block .div1 { grid-area: 1 / 1 / 2 / 2; }
+  .hex_block .div2 { grid-area: 1 / 2 / 2 / 3; }
+  .hex_block .div3 { grid-area: 1 / 3 / 2 / 4; }
+  .hex_block .div4 { grid-area: 1 / 4 / 2 / 5; }
+  .hex_block .div5 { grid-area: 1 / 5 / 2 / 6; }
+  .hex_block .div6 { grid-area: 1 / 6 / 2 / 7; }
+
+  .stats {
+    align-items: center;
+    max-width: 470px;
+    padding-bottom: 12px;
+    display: flex;
+    gap: 4px;
+    justify-self: end;
+  }
+
+  .stats div {
+    margin-right: 4px;
+  }
+
+  .stats div:last-child {
+    margin: 0;
+  }
+  
+
+  .hex-wrapper {
+    width: 40px;
+    height: 70px;
+    position: relative;
+  }
+
+  .hex-wrapper .title {
+    position: absolute;
+    top: 9px;
+    left: -12px;
+    text-decoration: underline;
+  }
+  
+  .hex-svg {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .hex-svg text {
+    fill: #fff;
+    font-family: monospace;
+    font-size: 60px;
+    font-weight: 100;
+  }
+
+  .boxed-stat {
+    border: 1px solid #59b3b74f;
+    padding: 3px 5px;
+    margin-left: 2px;
+    width: 14px;
+    justify-content: center;
+    display: inline-flex
+;
+  }
+
+  .bracketed-box {
+    position: relative;
+    padding: 0.5rem 1rem;
+    font-family: monospace;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    border: none;
+    margin: 10px 12px;
+  }
+  
+  .bracketed-box::before,
+  .bracketed-box::after {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 100%;
+    border: 2px solid #f05f92;
+  }
+  
+  .bracketed-box::before {
+    left: 0;
+    top: 0;
+    border-right: none;
+    display: block;
+  }
+  
+  .bracketed-box::after {
+    right: 0;
+    top: 0;
+    border-left: none;
+  }
+  .chevron-down {
+    position: relative;
+    display: inline-block;
+    align-items: center;
+    letter-spacing: 1px;
+    padding-right: 14px; /* hely a nyílnak */
+  }
+  
+  .chevron-down::after {
+    content: "";
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #59b3b7; /* szín a háromszöghez */
+  }
+
+  .chevron-right {
+    position: relative;
+    display: inline-block;
+    padding-right: 14px;
+  }
+  
+  .chevron-right::after {
+    content: "";
+    position: absolute;
+    top: 52%;
+    right: 5px;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    border-left: 4px solid #59b3b7;
+  }
+
+  .angle-right {
+    position: relative;
+    padding-left: 16px; /* hely a nyílnak */
+  }
+  
+  .angle-right::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: calc(50% + 2px);
+    transform: translateY(-50%) rotate(-45deg);
+    width: 4px;
+    height: 4px;
+    border-right: 2px solid #59b3b7;
+    border-bottom: 2px solid #59b3b7;
+  }
+  
+
+  .danger {
+    color: #f05f92
+  }
+
+  .neutral {
+    color: #fff
+  }
+
+  .space-right {
+    padding-right: 10px;
+  }
+
+  .space-left {
+    padding-left: 10px;
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
