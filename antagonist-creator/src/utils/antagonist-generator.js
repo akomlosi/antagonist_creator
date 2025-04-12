@@ -2,15 +2,11 @@ import { generateRandomCreatureName } from "./name-generator";
 
 function rand(arr) {
   if (!Array.isArray(arr)) {
-    throw new Error(
-      `A rand függvény csak tömböt fogad el. ${typeof arr} ${JSON.stringify(
-        arr
-      )}`
-    );
+    throw new Error(`Array expedted. ${typeof arr} ${JSON.stringify(arr)}`);
   }
 
   if (arr.length === 0) {
-    throw new Error("A tömb üres, nem lehet elemet választani.");
+    throw new Error("Empty array");
   }
 
   if (arr.length === 1) {
