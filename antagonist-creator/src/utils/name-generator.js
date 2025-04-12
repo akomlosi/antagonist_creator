@@ -1,3 +1,5 @@
+import { rand } from "./array-randomizer";
+
 const creatureNameSyllables = [
   [
     "Ael",
@@ -156,8 +158,6 @@ const creatureNameSyllables = [
     "Zo",
   ],
 ];
-
-const rand = (array) => array[Math.floor(Math.random() * array.length)];
 
 export const generateRandomCreatureName = () => {
   const syllableCount = Math.floor(Math.random() * 3) + 1;
