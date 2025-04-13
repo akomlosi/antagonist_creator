@@ -12,7 +12,7 @@ const generateDiceRoll = (diceRoll) => {
 
   const match = diceRoll.match(simplePattern);
   if (!match) {
-    throw new Error(`Hibás dobás formátum: "${diceRoll}"`);
+    throw new Error(`Bad diceroll format: "${diceRoll}"`);
   }
 
   const baseValue = parseInt(match[1], 10) || 0;
@@ -49,7 +49,7 @@ const mergeSkills = (modifiers, target) => {
     }
 
     if (typeof modValue === "number") {
-      let valueToAdd = modValue;
+      valueToAdd = modValue;
 
       if (typeof targetValue === "number") {
         result[key] += valueToAdd;

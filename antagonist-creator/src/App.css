@@ -232,21 +232,7 @@ div {
     padding-left: 10px;
   }
 
-  .regen_button {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    background: none;
-    outline: none;
-    border: none;
-    text-transform: uppercase;
-    cursor: pointer;
-  }
-
-  .save_button {
-    position: absolute;
-    bottom: 60px;
-    right: 20px;
+  .custom_button {
     background: none;
     outline: none;
     border: none;

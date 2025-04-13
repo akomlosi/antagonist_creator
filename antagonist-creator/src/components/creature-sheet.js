@@ -1,6 +1,3 @@
-import { config } from "../config/antagonists-config";
-import { generate } from "../utils/antagonist-generator";
-
 const Hex = ({ num, className, children }) => (
   <div className={`hex-wrapper ${className}`}>
     <span className="title">{children}</span>
