@@ -1,3 +1,9 @@
+import {
+  EASY,
+  ELITE,
+  OVERWHELMING,
+  STANDARD,
+} from "../config/difficulty.config";
 import { rand } from "./array-randomizer";
 import { generateRandomCreatureName } from "./name-generator";
 
@@ -62,12 +68,17 @@ const mergeSkills = (modifiers, target) => {
   return result;
 };
 
-export const generate = (antagonists) => {
-  const generatedConfig = {};
-  const randomDifficulty = rand(antagonists.difficulty);
-  generatedConfig.difficulty = { ...randomDifficulty };
+const getDifficulty = (antagonists, difficulty = EASY) => {
+  const indexes = [EASY, STANDARD, ELITE, OVERWHELMING];
+  return antagonists.difficulty[indexes.indexOf(difficulty)];
+};
 
-  const { damage, recovery, range } = randomDifficulty;
+export const generate = (antagonists, difficulty = EASY) => {
+  const generatedConfig = {};
+  const selectedDifficulty = getDifficulty(antagonists, difficulty);
+  generatedConfig.difficulty = { ...selectedDifficulty };
+
+  const { damage, recovery, range } = selectedDifficulty;
 
   generatedConfig.difficulty.damage = rand(damage);
 
