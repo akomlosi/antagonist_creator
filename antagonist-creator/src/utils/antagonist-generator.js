@@ -73,7 +73,12 @@ const getDifficulty = (antagonists, difficulty = EASY) => {
   return antagonists.difficulty[indexes.indexOf(difficulty)];
 };
 
-export const generate = (antagonists, difficulty = EASY) => {
+export const generate = (
+  antagonists,
+  difficulty = EASY,
+  randomType,
+  randomRole
+) => {
   const generatedConfig = {};
   const selectedDifficulty = getDifficulty(antagonists, difficulty);
   generatedConfig.difficulty = { ...selectedDifficulty };
@@ -101,9 +106,9 @@ export const generate = (antagonists, difficulty = EASY) => {
 
   const mods = antagonists.mods;
 
-  const { types, sizes, intelligence, role } = mods;
+  const { sizes, intelligence } = mods;
 
-  generatedConfig.type = rand(types);
+  generatedConfig.type = randomType;
 
   const randomSize = rand(sizes);
   generatedConfig.size = randomSize.description;
@@ -114,7 +119,6 @@ export const generate = (antagonists, difficulty = EASY) => {
 
   generatedConfig.difficulty.range = generateDiceRoll(range);
 
-  const randomRole = rand(role);
   generatedConfig.role = randomRole.description;
   generatedConfig.role_properties = randomRole.misc;
 
@@ -126,6 +130,5 @@ export const generate = (antagonists, difficulty = EASY) => {
     generatedConfig.difficulty
   );
 
-  generatedConfig.name = generateRandomCreatureName();
   return generatedConfig;
 };

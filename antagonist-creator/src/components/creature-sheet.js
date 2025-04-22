@@ -31,7 +31,6 @@ export const CreatureSheet = ({ creatureConfig }) => {
         <span className="space-right">
           {creatureConfig.difficulty.description}
         </span>
-        <span className="neutral">"{creatureConfig.name}"</span>
         {creatureConfig.difficulty.attack_num === 2 && (
           <div className="danger text_md">
             [Attacks <span className="text_highlighted">2</span> times on its
@@ -150,11 +149,16 @@ export const CreatureSheet = ({ creatureConfig }) => {
         <span className="chevron-right">Type</span>
         <span className="neutral">{creatureConfig.type}</span>
       </div>
-      <BracketedBox title={<div>{creatureConfig.role}</div>}>
+      <BracketedBox
+        title={
+          <div>
+            <span className="chevron-right">Role</span>
+            <span className="neutral">{creatureConfig.role}</span>
+          </div>
+        }
+      >
         {creatureConfig.role_properties.map((p, i) => (
-          <span key={`${p}-${i}`} className="angle-right">
-            {p}
-          </span>
+          <span key={`${p}-${i}`}>{p}</span>
         ))}
         <span className="angle-right">{creatureConfig.role_properties}</span>
       </BracketedBox>

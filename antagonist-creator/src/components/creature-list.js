@@ -6,8 +6,9 @@ import {
 import { generate } from "../utils/antagonist-generator";
 import { rand } from "../utils/array-randomizer";
 import { clearAll, read, save } from "../utils/local-storage";
+import { generateRandomCreatureName } from "../utils/name-generator";
 import { CreatureSheet } from "./creature-sheet";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 export const CreatureList = () => {
   const { antagonists } = config;
@@ -50,14 +51,21 @@ export const CreatureList = () => {
     }
   };
 
+  const mods = antagonists.mods;
+  const { types, role } = mods;
+  const randomType = useMemo(() => rand(types), [types]);
+  const randomRole = useMemo(() => rand(role), [role]);
+  console.log(randomRole);
+
   useEffect(() => {
     const difficulty = rand(availableDifficulties);
     const selectedDifficulty =
       encounterDifficulty[availableCrewCounts.indexOf(crewCount)][difficulty];
     const randomDifficulty = rand(selectedDifficulty);
     const creatures = [];
+
     randomDifficulty.map((difficulty) =>
-      creatures.push(generate(antagonists, difficulty))
+      creatures.push(generate(antagonists, difficulty, randomType, randomRole))
     );
     if (creatures.length) {
       setCreatureConfigs(creatures);
@@ -73,13 +81,18 @@ export const CreatureList = () => {
 
   return (
     <>
+      <span className="neutral">"{generateRandomCreatureName()}" | </span>
+      <span className="neutral">{randomType} | </span>
+      <span className="neutral">{randomRole.description}</span>
       <div className="list">
         {creatureConfigs.map((creatureConfig, i) => {
           return (
-            <CreatureSheet
-              key={`creature-sheet-${i}`}
-              creatureConfig={creatureConfig}
-            />
+            <>
+              <CreatureSheet
+                key={`creature-sheet-${i}`}
+                creatureConfig={creatureConfig}
+              />
+            </>
           );
         })}
       </div>

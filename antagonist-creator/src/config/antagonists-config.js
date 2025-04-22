@@ -121,7 +121,7 @@ export const config = {
       },
     ],
     mods: {
-      types: ["Guardian", "Abberation", "Synthetic"],
+      types: ["Guardian", "Abberation", "Synthetic"], // TODO: handle Guardians properly
       sizes: [
         {
           description: "Rodent to housecat",
