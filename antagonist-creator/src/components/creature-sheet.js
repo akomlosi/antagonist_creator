@@ -160,7 +160,6 @@ export const CreatureSheet = ({ creatureConfig }) => {
         {creatureConfig.role_properties.map((p, i) => (
           <span key={`${p}-${i}`}>{p}</span>
         ))}
-        <span className="angle-right">{creatureConfig.role_properties}</span>
       </BracketedBox>
       <div>
         <span className="chevron-right">Size</span>

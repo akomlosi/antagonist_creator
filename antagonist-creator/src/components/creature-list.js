@@ -1,6 +1,7 @@
 import { config } from "../config/antagonists-config";
 import {
   availableDifficulties,
+  EASY,
   encounterDifficulty,
 } from "../config/difficulty.config";
 import { generate } from "../utils/antagonist-generator";
@@ -64,9 +65,13 @@ export const CreatureList = () => {
     const randomDifficulty = rand(selectedDifficulty);
     const creatures = [];
 
-    randomDifficulty.map((difficulty) =>
-      creatures.push(generate(antagonists, difficulty, randomType, randomRole))
-    );
+    randomDifficulty.map((difficulty) => {
+      let r =
+        parseInt(crewCount, 10) === 1 && difficulty === EASY
+          ? role[0]
+          : randomRole;
+      return creatures.push(generate(antagonists, difficulty, randomType, r));
+    });
     if (creatures.length) {
       setCreatureConfigs(creatures);
     }

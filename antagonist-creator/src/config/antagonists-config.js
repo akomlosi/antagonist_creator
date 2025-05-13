@@ -268,5 +268,6 @@ export const config = {
       "Vicious",
     ],
     appearance: ["humanoid", "quadruped/sextuped", "serpentine"],
+    guardians: [],
   },
 };
