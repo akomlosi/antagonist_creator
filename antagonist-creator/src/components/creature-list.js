@@ -1,22 +1,12 @@
-import { config } from "../config/antagonists-config";
-import {
-  availableDifficulties,
-  EASY,
-  encounterDifficulty,
-} from "../config/difficulty.config";
+import { encounterDifficulty } from "../config/difficulty.config";
 import { generate } from "../utils/antagonist-generator";
 import { rand } from "../utils/array-randomizer";
+import { generateRandomCreatureName } from "../utils/generators/name-generator";
 import { clearAll, read, save } from "../utils/local-storage";
-import { generateRandomCreatureName } from "../utils/name-generator";
 import { CreatureSheet } from "./creature-sheet";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
-export const CreatureList = () => {
-  const { antagonists } = config;
-  const params = new URL(window.location.href).searchParams;
-  const crewCount = params.get("crew") || 1;
-  const availableCrewCounts = ["1", "3", "5"];
-
+export const CreatureList = ({ difficulty, crewCount, type, role }) => {
   const [creatureConfigs, setCreatureConfigs] = useState([]);
   const [storedCreatureLists, setStoredCreatureLists] = useState([]);
 
@@ -52,30 +42,19 @@ export const CreatureList = () => {
     }
   };
 
-  const mods = antagonists.mods;
-  const { types, role } = mods;
-  const randomType = useMemo(() => rand(types), [types]);
-  const randomRole = useMemo(() => rand(role), [role]);
-  console.log(randomRole);
-
   useEffect(() => {
-    const difficulty = rand(availableDifficulties);
     const selectedDifficulty =
-      encounterDifficulty[availableCrewCounts.indexOf(crewCount)][difficulty];
+      encounterDifficulty[parseInt(crewCount, 10)][difficulty];
     const randomDifficulty = rand(selectedDifficulty);
     const creatures = [];
 
-    randomDifficulty.map((difficulty) => {
-      let r =
-        parseInt(crewCount, 10) === 1 && difficulty === EASY
-          ? role[0]
-          : randomRole;
-      return creatures.push(generate(antagonists, difficulty, randomType, r));
-    });
+    randomDifficulty.map((difficulty) =>
+      creatures.push(generate({ difficulty, type, role }))
+    );
     if (creatures.length) {
       setCreatureConfigs(creatures);
     }
-  }, [antagonists, crewCount]);
+  }, [crewCount]);
 
   useEffect(() => {
     const storedData = read();
@@ -87,17 +66,15 @@ export const CreatureList = () => {
   return (
     <>
       <span className="neutral">"{generateRandomCreatureName()}" | </span>
-      <span className="neutral">{randomType} | </span>
-      <span className="neutral">{randomRole.description}</span>
+      <span className="neutral">{type} | </span>
+      {/** <span className="neutral">{role.description}</span> */}
       <div className="list">
         {creatureConfigs.map((creatureConfig, i) => {
           return (
-            <>
-              <CreatureSheet
-                key={`creature-sheet-${i}`}
-                creatureConfig={creatureConfig}
-              />
-            </>
+            <CreatureSheet
+              key={`creature-sheet-${i}`}
+              creatureConfig={creatureConfig}
+            />
           );
         })}
       </div>

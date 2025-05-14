@@ -1,38 +1,16 @@
-import {
-  EASY,
-  ELITE,
-  OVERWHELMING,
-  STANDARD,
-} from "../config/difficulty.config";
-import { rand } from "./array-randomizer";
-import { generateRandomCreatureName } from "./name-generator";
-
-const generateDiceRoll = (diceRoll) => {
-  const simplePattern = /^(\d+)?([+-])?\(?(\d+)D(\d+)\)?$/i;
-
-  const match = diceRoll.match(simplePattern);
-  if (!match) {
-    throw new Error(`Bad diceroll format: "${diceRoll}"`);
-  }
-
-  const baseValue = parseInt(match[1], 10) || 0;
-  const operator = match[2] || null;
-  const numberOfDice = parseInt(match[3], 10);
-  const diceSides = parseInt(match[4], 10);
-
-  if (![4, 6, 8, 10, 12, 20, 100].includes(diceSides)) {
-    throw new Error(`not supported format: ${diceRoll}`);
-  }
-
-  let rollTotal = 0;
-  for (let i = 0; i < numberOfDice; i++) {
-    rollTotal += Math.floor(Math.random() * diceSides) + 1;
-  }
-
-  if (operator === "+") return baseValue + rollTotal;
-  if (operator === "-") return baseValue - rollTotal;
-  return rollTotal;
-};
+import { abilityGenerator } from "./generators/ability-generator";
+import { appearanceGenerator } from "./generators/appearance-generator";
+import { armorDefenseGenerator } from "./generators/armor-defense-generator";
+import { damageGenerator } from "./generators/damage-generator";
+import { damageModifierBySizeGenerator } from "./generators/damage-modifier-by-size-generator";
+import { driveGenerator } from "./generators/drive-generator";
+import { intelligenceModifierGenerator } from "./generators/intelligence-generator";
+import { generatorPipeline } from "./generators/pipeline/pipeline";
+import { rangeGenerator } from "./generators/range-generator";
+import { recoveryReactionsGenerator } from "./generators/recovery-reactions-generator";
+import { statsGenerator } from "./generators/stats-generator";
+import { statsModifierByRoleGenerator } from "./generators/stats-modifier-by-role-generator";
+import { uniqueTraitsGenerator } from "./generators/unique-trait-generator";
 
 const mergeSkills = (modifiers, target) => {
   const result = structuredClone(target);
@@ -44,9 +22,9 @@ const mergeSkills = (modifiers, target) => {
     const targetValue = target[key];
     let valueToAdd;
 
-    if (typeof modValue === "string" && modValue.includes("D")) {
-      valueToAdd = generateDiceRoll(modValue);
-    }
+    //    if (typeof modValue === "string" && modValue.includes("D")) {
+    //      valueToAdd = generateDiceRoll(modValue);
+    //    }
 
     if (typeof modValue === "number") {
       valueToAdd = modValue;
@@ -68,67 +46,34 @@ const mergeSkills = (modifiers, target) => {
   return result;
 };
 
-const getDifficulty = (antagonists, difficulty = EASY) => {
-  const indexes = [EASY, STANDARD, ELITE, OVERWHELMING];
-  return antagonists.difficulty[indexes.indexOf(difficulty)];
-};
-
-export const generate = (
-  antagonists,
-  difficulty = EASY,
-  randomType,
-  randomRole
-) => {
-  const generatedConfig = {};
-  const selectedDifficulty = getDifficulty(antagonists, difficulty);
-  generatedConfig.difficulty = { ...selectedDifficulty };
-
-  const { damage, recovery, range } = selectedDifficulty;
-
-  generatedConfig.difficulty.damage = rand(damage);
-
-  // When armor and defense is defined we randomly choose one and drop the other
-  if (generatedConfig.difficulty.armor > 0) {
-    if (Math.random() < 0.5) {
-      generatedConfig.difficulty.armor = 0;
-    } else {
-      generatedConfig.difficulty.defense = 0;
-    }
-  }
-
-  if (recovery) {
-    const rec = { ...recovery };
-    generatedConfig.difficulty.recovery = {};
-    generatedConfig.difficulty.recovery.bloodied = rand(rec.bloodied);
-    generatedConfig.difficulty.recovery.cornered = rand(rec.cornered);
-    generatedConfig.difficulty.recovery.overwhelmed = rand(rec.overwhelmed);
-  }
-
-  const mods = antagonists.mods;
-
-  const { sizes, intelligence } = mods;
-
-  generatedConfig.type = randomType;
-
-  const randomSize = rand(sizes);
-  generatedConfig.size = randomSize.description;
-  generatedConfig.difficulty.damage.damage_mod += randomSize.damage.damage_mod;
-
-  const randomIntelligence = rand(intelligence);
-  generatedConfig.difficulty.INT = generateDiceRoll(randomIntelligence.INT);
-
-  generatedConfig.difficulty.range = generateDiceRoll(range);
-
-  generatedConfig.role = randomRole.description;
-  generatedConfig.role_properties = randomRole.misc;
-
-  generatedConfig.ability = rand(antagonists.abilities);
-  generatedConfig.appearance = rand(antagonists.appearance);
-
-  generatedConfig.difficulty = mergeSkills(
-    randomRole,
-    generatedConfig.difficulty
-  );
-
+export const generate = (userConfig) => {
+  const generatedConfig = generatorPipeline(userConfig, [
+    // TODO: add type and role to the config too!
+    // Getting the basic creature stats
+    statsGenerator,
+    // Defining and flattening the damage. A random damage stat is calculated now
+    damageGenerator,
+    // Generating a random creature size and add its damage modifier to the damage stat
+    damageModifierBySizeGenerator,
+    // Generating a random creature drive
+    driveGenerator,
+    // Based on creature intelligence it overrides the original INT value with a generated dice-roll (page 269.)
+    intelligenceModifierGenerator,
+    // Random range generated from a dice roll
+    rangeGenerator,
+    // Generating random recovery reactions if available
+    recoveryReactionsGenerator,
+    // By role we apply further stats modifications
+    statsModifierByRoleGenerator,
+    // Applies random unique traits (page 278)
+    uniqueTraitsGenerator,
+    // Generates as many random abilites as the current difficulty requires
+    abilityGenerator,
+    // Generates random appearance for hit locations
+    appearanceGenerator,
+    // When armor and defense is defined we randomly choose one and drop the other
+    armorDefenseGenerator,
+  ]);
+  console.log("generated: ", generatedConfig);
   return generatedConfig;
 };

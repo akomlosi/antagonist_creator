@@ -28,10 +28,8 @@ export const CreatureSheet = ({ creatureConfig }) => {
   return (
     <article>
       <div className="div1 text_heading text_highlighted">
-        <span className="space-right">
-          {creatureConfig.difficulty.description}
-        </span>
-        {creatureConfig.difficulty.attack_num === 2 && (
+        <span className="space-right">{creatureConfig.description}</span>
+        {creatureConfig.attackNum === 2 && (
           <div className="danger text_md">
             [Attacks <span className="text_highlighted">2</span> times on its
             turn]
@@ -40,22 +38,22 @@ export const CreatureSheet = ({ creatureConfig }) => {
       </div>
       <div className="top_block">
         <div className="hex_block">
-          <Hex num={creatureConfig.difficulty.STR} className={"div1"}>
+          <Hex num={creatureConfig.STR} className={"div1"}>
             STR
           </Hex>
-          <Hex num={creatureConfig.difficulty.DEX} className={"div2"}>
+          <Hex num={creatureConfig.DEX} className={"div2"}>
             DEX
           </Hex>
-          <Hex num={creatureConfig.difficulty.CON} className={"div3"}>
+          <Hex num={creatureConfig.CON} className={"div3"}>
             CON
           </Hex>
-          <Hex num={creatureConfig.difficulty.WIL} className={"div4"}>
+          <Hex num={creatureConfig.WIL} className={"div4"}>
             WIL
           </Hex>
-          <Hex num={creatureConfig.difficulty.INT} className={"div5"}>
+          <Hex num={creatureConfig.INT} className={"div5"}>
             INT
           </Hex>
-          <Hex num={creatureConfig.difficulty.CHA} className={"div6"}>
+          <Hex num={creatureConfig.CHA} className={"div6"}>
             CHA
           </Hex>
         </div>
@@ -63,29 +61,25 @@ export const CreatureSheet = ({ creatureConfig }) => {
           <div>
             <span className="chevron-right">wounds</span>
             <span className=" text_highlighted boxed-stat">
-              {creatureConfig.difficulty.wounds}
+              {creatureConfig.wounds}
             </span>
           </div>
           <div>
             <span className="chevron-right">awareness</span>
             <span className=" text_highlighted boxed-stat">
-              {creatureConfig.difficulty.awareness}
+              {creatureConfig.awareness}
             </span>
           </div>
           <div>
             <span className="chevron-right">armor</span>
             <span className=" text_highlighted boxed-stat">
-              {creatureConfig.difficulty.armor === 0
-                ? "-"
-                : creatureConfig.difficulty.armor}
+              {creatureConfig.armor === 0 ? "-" : creatureConfig.armor}
             </span>
           </div>
           <div>
             <span className="chevron-right">defense</span>
             <span className="div8 text_highlighted boxed-stat">
-              {creatureConfig.difficulty.defense === 0
-                ? "-"
-                : creatureConfig.difficulty.defense}
+              {creatureConfig.defense === 0 ? "-" : creatureConfig.defense}
             </span>
           </div>
         </div>
@@ -94,40 +88,36 @@ export const CreatureSheet = ({ creatureConfig }) => {
         <div>
           <span className="chevron-right">Attack skill</span>
           <span className="text_highlighted">
-            +{creatureConfig.difficulty.damage.attack_skill}
+            +{creatureConfig.attackSkill}
           </span>
         </div>
         <div>
           <span className="chevron-right">Damage</span>
-          <span className="text_highlighted">
-            +{creatureConfig.difficulty.damage.damage_mod}
-          </span>
+          <span className="text_highlighted">+{creatureConfig.damage}</span>
         </div>
       </BracketedBox>
       <div>
         <span className="chevron-right"> Range (if applicable)</span>
-        <span className="text_highlighted">
-          {creatureConfig.difficulty.range}
-        </span>
+        <span className="text_highlighted">{creatureConfig.range}</span>
       </div>
       <div>
         <span className="chevron-right">abilities</span>
         <span className="danger">{creatureConfig.ability}</span>
       </div>
-      {creatureConfig.difficulty.recovery && (
+      {creatureConfig.recovery && (
         <div>
           <div className="chevron-down">Recovery reactions</div>
           <div className="space-left">
             <div>
               <span className="danger space-right angle-right">[Bloodied]</span>
               <span className="neutral">
-                {creatureConfig.difficulty.recovery.bloodied}
+                {creatureConfig.recovery.bloodied}
               </span>
             </div>
             <div>
               <span className="danger space-right angle-right">[Cornered]</span>
               <span className="neutral">
-                {creatureConfig.difficulty.recovery.cornered}
+                {creatureConfig.recovery.cornered}
               </span>
             </div>
             <div>
@@ -135,7 +125,7 @@ export const CreatureSheet = ({ creatureConfig }) => {
                 [Overwhelmed]
               </span>
               <span className="neutral">
-                {creatureConfig.difficulty.recovery.overwhelmed}
+                {creatureConfig.recovery.overwhelmed}
               </span>
             </div>
           </div>
@@ -157,9 +147,10 @@ export const CreatureSheet = ({ creatureConfig }) => {
           </div>
         }
       >
-        {creatureConfig.role_properties.map((p, i) => (
+        {creatureConfig.roleProperties.map((p, i) => (
           <span key={`${p}-${i}`}>{p}</span>
         ))}
+        <span className="angle-right">{creatureConfig.roleProperties}</span>
       </BracketedBox>
       <div>
         <span className="chevron-right">Size</span>

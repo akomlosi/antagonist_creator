@@ -7,9 +7,9 @@ export const OVERWHELMING = "overwhelming";
 // if you wanna have quite impossible challenges... I don't...
 export const availableDifficulties = [EASY, STANDARD];
 
-export const encounterDifficulty = [
+export const encounterDifficulty = {
   // one-member crew
-  {
+  1: {
     [EASY]: [[EASY]],
     [STANDARD]: [[STANDARD], [EASY, EASY]],
     [ELITE]: [
@@ -29,7 +29,7 @@ export const encounterDifficulty = [
     ],
   },
   // three-member crew
-  {
+  3: {
     [EASY]: [
       [EASY, EASY, EASY],
       [EASY, STANDARD],
@@ -44,4 +44,20 @@ export const encounterDifficulty = [
     [ELITE]: [],
     [OVERWHELMING]: [],
   },
-];
+  // five-member crew
+  5: {
+    [EASY]: [
+      [EASY, EASY, EASY],
+      [EASY, STANDARD],
+    ],
+    [STANDARD]: [
+      [STANDARD, STANDARD, STANDARD],
+      [EASY, EASY, STANDARD, STANDARD],
+      [EASY, EASY, EASY, EASY, STANDARD],
+      [EASY, EASY, EASY, EASY, EASY, EASY],
+      [ELITE, EASY, EASY],
+    ],
+    [ELITE]: [],
+    [OVERWHELMING]: [],
+  },
+};
