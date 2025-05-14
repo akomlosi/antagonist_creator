@@ -100,7 +100,7 @@ export const CreatureSheet = ({ creatureConfig }) => {
       </div>
       <div>
         <span className="chevron-right">abilities</span>
-        <span className="danger">{creatureConfig.ability}</span>
+        <span className="danger">{creatureConfig.abilities.join(", ")}</span>
       </div>
       {creatureConfig.recovery && (
         <div>
@@ -133,22 +133,13 @@ export const CreatureSheet = ({ creatureConfig }) => {
         <span className="chevron-right">Appearance</span>
         <span className="neutral">{creatureConfig.appearance}</span>
       </div>
-      <div>
-        <span className="chevron-right">Type</span>
-        <span className="neutral">{creatureConfig.type}</span>
-      </div>
-      <BracketedBox
-        title={
-          <div>
-            <span className="chevron-right">Role</span>
-            <span className="neutral">{creatureConfig.role}</span>
-          </div>
-        }
-      >
+
+      <BracketedBox title={"Enemy role"}>
         {creatureConfig.roleProperties.map((p, i) => (
-          <span key={`${p}-${i}`}>{p}</span>
+          <span className="angle-right" key={`${p}-${i}`}>
+            {p}
+          </span>
         ))}
-        <span className="angle-right">{creatureConfig.roleProperties}</span>
       </BracketedBox>
       <div>
         <span className="chevron-right">Size</span>
