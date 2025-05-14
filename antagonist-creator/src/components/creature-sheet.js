@@ -87,13 +87,11 @@ export const CreatureSheet = ({ creatureConfig }) => {
       <BracketedBox title={"Damage"}>
         <div>
           <span className="chevron-right">Attack skill</span>
-          <span className="text_highlighted">
-            +{creatureConfig.attackSkill}
-          </span>
+          <span className="text_highlighted">{creatureConfig.attackSkill}</span>
         </div>
         <div>
           <span className="chevron-right">Damage</span>
-          <span className="text_highlighted">+{creatureConfig.damage}</span>
+          <span className="text_highlighted">{creatureConfig.damage}</span>
         </div>
       </BracketedBox>
       <div>

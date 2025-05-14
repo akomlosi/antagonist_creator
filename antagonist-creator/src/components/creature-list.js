@@ -67,7 +67,7 @@ export const CreatureList = ({ difficulty, crewCount, type, role }) => {
     <>
       <span className="neutral">"{generateRandomCreatureName()}" | </span>
       <span className="neutral">{type} | </span>
-      {/** <span className="neutral">{role.description}</span> */}
+      <span className="neutral">{role}</span>
       <div className="list">
         {creatureConfigs.map((creatureConfig, i) => {
           return (
