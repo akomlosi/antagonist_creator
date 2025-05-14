@@ -12,43 +12,8 @@ import { statsGenerator } from "./generators/stats-generator";
 import { statsModifierByRoleGenerator } from "./generators/stats-modifier-by-role-generator";
 import { uniqueTraitsGenerator } from "./generators/unique-trait-generator";
 
-const mergeSkills = (modifiers, target) => {
-  const result = structuredClone(target);
-
-  for (const key in modifiers) {
-    if (!target.hasOwnProperty(key)) continue;
-
-    const modValue = modifiers[key];
-    const targetValue = target[key];
-    let valueToAdd;
-
-    //    if (typeof modValue === "string" && modValue.includes("D")) {
-    //      valueToAdd = generateDiceRoll(modValue);
-    //    }
-
-    if (typeof modValue === "number") {
-      valueToAdd = modValue;
-
-      if (typeof targetValue === "number") {
-        result[key] += valueToAdd;
-      }
-    } else if (Array.isArray(modValue)) {
-      if (Array.isArray(targetValue)) {
-        result[key] = [...targetValue, ...modValue];
-      } else {
-        result[key] = modValue;
-      }
-    } else if (typeof modValue === "object" && modValue !== null) {
-      result[key] = mergeSkills(modValue, targetValue);
-    }
-  }
-
-  return result;
-};
-
 export const generate = (userConfig) => {
   const generatedConfig = generatorPipeline(userConfig, [
-    // TODO: add type and role to the config too!
     // Getting the basic creature stats
     statsGenerator,
     // Defining and flattening the damage. A random damage stat is calculated now
@@ -74,6 +39,5 @@ export const generate = (userConfig) => {
     // When armor and defense is defined we randomly choose one and drop the other
     armorDefenseGenerator,
   ]);
-  console.log("generated: ", generatedConfig);
   return generatedConfig;
 };
