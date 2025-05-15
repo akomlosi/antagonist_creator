@@ -9,7 +9,7 @@ export const statsByDifficulty = {
     WIL: 6,
     INT: 6,
     CHA: 0,
-    damage: [{ attackSkill: 2, damage: "(1D10)+5" }],
+    damage: [{ attackSkill: 2, damage: "(1D10)", damageMod: 5 }],
     attackNum: 1,
     abilityNum: 1,
     range: "1+(1D10)",
@@ -29,11 +29,13 @@ export const statsByDifficulty = {
     damage: [
       {
         attackSkill: 5,
-        damage: "(1D10)+5",
+        damage: "(1D10)",
+        damageMod: 5
       },
       {
         attackSkill: 2,
         damage: "(2D12)",
+        damageMod: 0
       },
     ],
     attackNum: 1,
@@ -61,10 +63,12 @@ export const statsByDifficulty = {
       {
         attackSkill: 8,
         damage: "(2D12)",
+        damageMod: 0
       },
       {
         attackSkill: 4,
-        damage: "(2D10)+5",
+        damage: "(2D10)",
+        damageMod: 5
       },
     ],
     attackNum: 1,
@@ -92,10 +96,12 @@ export const statsByDifficulty = {
       {
         attackSkill: 10,
         damage: "(3D12)",
+        damageMod: 0
       },
       {
         attackSkill: 5,
-        damage: "(3D10)+5",
+        damage: "(3D10)",
+        damageMod: 5
       },
     ],
     attackNum: 2,

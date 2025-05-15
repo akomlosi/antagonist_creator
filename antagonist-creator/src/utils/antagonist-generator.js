@@ -39,5 +39,7 @@ export const generate = (userConfig) => {
     // When armor and defense is defined we randomly choose one and drop the other
     armorDefenseGenerator,
   ]);
+
+  console.log("Generated config: ", generatedConfig);
   return generatedConfig;
 };

@@ -1,22 +1,22 @@
 export const creatureSizes = [
   {
     description: "Rodent to housecat",
-    damage: "-2",
+    damage: -2,
   },
   {
     description: "Large dog to wildcat",
-    damage: "-1",
+    damage: -1,
   },
   {
     description: "Humanoid in size",
-    damage: "",
+    damage: 0,
   },
   {
     description: "Larger than human, like a huge gorilla",
-    damage: "+1",
+    damage: 1,
   },
   {
     description: "Cow to alligator",
-    damage: "+2",
+    damage: 2,
   },
 ];

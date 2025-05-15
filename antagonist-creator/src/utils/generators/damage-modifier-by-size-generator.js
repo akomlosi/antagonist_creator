@@ -6,6 +6,6 @@ export const damageModifierBySizeGenerator = (userConfig, generatedConfig) => {
   return {
     ...generatedConfig,
     size,
-    damage: generatedConfig.damage + damage,
+    damageMod: generatedConfig.damageMod + damage,
   };
 };

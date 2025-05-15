@@ -12,9 +12,8 @@ export const creatureStatsByRole = {
     STR: 1,
     DEX: -1,
     CON: 1,
-    damage: 2,
     attackSkill: -2,
-    damage: 2,
+    damageMod: 2,
     awareness: -2,
     roleProperties: [
       "+1 to Hit location rolls",
