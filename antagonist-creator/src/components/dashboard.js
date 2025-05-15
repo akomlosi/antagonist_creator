@@ -7,73 +7,114 @@ import {
 } from "../config/difficulty.config";
 import { CREATURE_TYPE } from "../config/creature/defaults/types";
 import { ROLES } from "../config/creature/defaults/roles";
+import { Button } from "./generic-ui/button/button";
+import { ButtonGroup } from "./generic-ui/button-group/button-group";
+import { Modal } from "./generic-ui/modal/modal";
 
 const { GUARDIAN, ABBERATION, SYNTHETIC, LOCAL_FAUNA } = CREATURE_TYPE;
 const { BRUTE, LURKER, PSYCHIC, RANGED, SWARM } = ROLES;
 
 export const Dashboard = ({ onGenerateStart }) => {
-  const [crewCount, setCrewCount] = useState("1");
+  const [crewCount, setCrewCount] = useState(1);
   const [difficulty, setDifficulty] = useState(EASY);
   const [type, setType] = useState(ABBERATION);
   const [role, setRole] = useState(BRUTE);
+
+  const onlyBrute = parseInt(crewCount, 10) === 1 && difficulty === EASY;
+
   return (
-    <>
-      <label>
-        Crew count:
-        <select
-          name="selectedCrewCount"
-          defaultValue={crewCount}
-          onChange={(e) => setCrewCount(e.target.value)}
+    <Modal>
+      <ButtonGroup title="Crew count">
+        <Button highlighted={crewCount === 1} onClick={() => setCrewCount(1)}>
+          One-member crew
+        </Button>
+        <Button highlighted={crewCount === 3} onClick={() => setCrewCount(3)}>
+          Three-member crew
+        </Button>
+        <Button highlighted={crewCount === 5} onClick={() => setCrewCount(5)}>
+          Five-member crew
+        </Button>
+      </ButtonGroup>
+      <ButtonGroup title="Difficulty">
+        <Button
+          highlighted={difficulty === EASY}
+          onClick={() => setDifficulty(EASY)}
         >
-          <option value="1">One-member crew</option>
-          <option value="3">Three-member crew</option>
-          <option value="5">Five-member crew</option>
-        </select>
-      </label>
-
-      <label>
-        Difficulty:
-        <select
-          name="selectedDifficulty"
-          defaultValue={difficulty}
-          onChange={(e) => setDifficulty(e.target.value)}
+          Easy
+        </Button>
+        <Button
+          highlighted={difficulty === STANDARD}
+          onClick={() => setDifficulty(STANDARD)}
         >
-          <option value={EASY}>{EASY}</option>
-          <option value={STANDARD}>{STANDARD}</option>
-          <option value={ELITE}>{ELITE}</option>
-          <option value={OVERWHELMING}>{OVERWHELMING}</option>
-        </select>
-      </label>
-
-      <label>
-        Creature type:
-        <select
-          name="selectedCreaturType"
-          defaultValue={type}
-          onChange={(e) => setType(e.target.value)}
+          Standard
+        </Button>
+        <Button
+          highlighted={difficulty === ELITE}
+          onClick={() => setDifficulty(ELITE)}
         >
-          <option value={ABBERATION}>{ABBERATION}</option>
-          <option value={SYNTHETIC}>{SYNTHETIC}</option>
-          <option value={LOCAL_FAUNA}>{LOCAL_FAUNA}</option>
-        </select>
-      </label>
-
-      <label>
-        Creature type:
-        <select
-          name="selectedCreaturRole"
-          defaultValue={role}
-          onChange={(e) => setRole(e.target.value)}
+          Elite
+        </Button>
+        <Button
+          highlighted={difficulty === OVERWHELMING}
+          onClick={() => setDifficulty(OVERWHELMING)}
         >
-          <option value={BRUTE}>{BRUTE}</option>
-          <option value={LURKER}>{LURKER}</option>
-          <option value={PSYCHIC}>{PSYCHIC}</option>
-          <option value={RANGED}>{RANGED}</option>
-          <option value={SWARM}>{SWARM}</option>
-        </select>
-      </label>
-
-      <button
+          Overwhelming
+        </Button>
+      </ButtonGroup>
+      <ButtonGroup title="Creature type">
+        <Button
+          highlighted={type === ABBERATION}
+          onClick={() => setType(ABBERATION)}
+        >
+          Abberation
+        </Button>
+        <Button
+          highlighted={type === SYNTHETIC}
+          onClick={() => setType(SYNTHETIC)}
+        >
+          Synthetic
+        </Button>
+        <Button
+          highlighted={type === LOCAL_FAUNA}
+          onClick={() => setType(LOCAL_FAUNA)}
+        >
+          Local Fauna
+        </Button>
+      </ButtonGroup>
+      <ButtonGroup title="Creature role">
+        <Button highlighted={role === BRUTE} onClick={() => setRole(BRUTE)}>
+          Brute
+        </Button>
+        <Button
+          disabled={onlyBrute}
+          highlighted={role === LURKER}
+          onClick={() => setRole(LURKER)}
+        >
+          Lurker
+        </Button>
+        <Button
+          disabled={onlyBrute}
+          highlighted={role === RANGED}
+          onClick={() => setRole(RANGED)}
+        >
+          Ranged
+        </Button>
+        <Button
+          disabled={onlyBrute}
+          highlighted={role === SWARM}
+          onClick={() => setRole(SWARM)}
+        >
+          Swarm
+        </Button>
+        <Button
+          disabled={onlyBrute}
+          highlighted={role === PSYCHIC}
+          onClick={() => setRole(PSYCHIC)}
+        >
+          Psychic
+        </Button>
+      </ButtonGroup>
+      <Button
         onClick={() =>
           onGenerateStart({
             crewCount,
@@ -83,32 +124,8 @@ export const Dashboard = ({ onGenerateStart }) => {
           })
         }
       >
-        GENERATE UNIQUE ENCOUNTER
-      </button>
-      <button
-        onClick={() =>
-          onGenerateStart({
-            crewCount,
-            difficulty,
-            role,
-            type,
-          })
-        }
-      >
-        GENERATE GUARDIAN
-      </button>
-      <button
-        onClick={() =>
-          onGenerateStart({
-            crewCount,
-            difficulty,
-            role,
-            type,
-          })
-        }
-      >
-        GENERATE KNOWN THREAT
-      </button>
-    </>
+        GENERATE CREATURE
+      </Button>
+    </Modal>
   );
 };
