@@ -19,113 +19,120 @@ export const Dashboard = ({ onGenerateStart }) => {
   const [difficulty, setDifficulty] = useState(EASY);
   const [type, setType] = useState(ABBERATION);
   const [role, setRole] = useState(BRUTE);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const onlyBrute = parseInt(crewCount, 10) === 1 && difficulty === EASY;
 
   return (
-    <Modal>
-      <ButtonGroup title="Crew count">
-        <Button highlighted={crewCount === 1} onClick={() => setCrewCount(1)}>
-          One-member crew
-        </Button>
-        <Button highlighted={crewCount === 3} onClick={() => setCrewCount(3)}>
-          Three-member crew
-        </Button>
-        <Button highlighted={crewCount === 5} onClick={() => setCrewCount(5)}>
-          Five-member crew
-        </Button>
-      </ButtonGroup>
-      <ButtonGroup title="Difficulty">
+    <>
+      {!isModalOpen && (
+        <Button onClick={() => setIsModalOpen(true)}>Open Dashboard</Button>
+      )}
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <ButtonGroup title="Crew count">
+          <Button highlighted={crewCount === 1} onClick={() => setCrewCount(1)}>
+            One-member crew
+          </Button>
+          <Button highlighted={crewCount === 3} onClick={() => setCrewCount(3)}>
+            Three-member crew
+          </Button>
+          <Button highlighted={crewCount === 5} onClick={() => setCrewCount(5)}>
+            Five-member crew
+          </Button>
+        </ButtonGroup>
+        <ButtonGroup title="Difficulty">
+          <Button
+            highlighted={difficulty === EASY}
+            onClick={() => setDifficulty(EASY)}
+          >
+            Easy
+          </Button>
+          <Button
+            highlighted={difficulty === STANDARD}
+            onClick={() => setDifficulty(STANDARD)}
+          >
+            Standard
+          </Button>
+          <Button
+            highlighted={difficulty === ELITE}
+            onClick={() => setDifficulty(ELITE)}
+          >
+            Elite
+          </Button>
+          <Button
+            highlighted={difficulty === OVERWHELMING}
+            onClick={() => setDifficulty(OVERWHELMING)}
+          >
+            Overwhelming
+          </Button>
+        </ButtonGroup>
+        <ButtonGroup title="Creature type">
+          <Button
+            highlighted={type === ABBERATION}
+            onClick={() => setType(ABBERATION)}
+          >
+            Abberation
+          </Button>
+          <Button
+            highlighted={type === SYNTHETIC}
+            onClick={() => setType(SYNTHETIC)}
+          >
+            Synthetic
+          </Button>
+          <Button
+            highlighted={type === LOCAL_FAUNA}
+            onClick={() => setType(LOCAL_FAUNA)}
+          >
+            Local Fauna
+          </Button>
+        </ButtonGroup>
+        <ButtonGroup title="Creature role">
+          <Button highlighted={role === BRUTE} onClick={() => setRole(BRUTE)}>
+            Brute
+          </Button>
+          <Button
+            disabled={onlyBrute}
+            highlighted={role === LURKER}
+            onClick={() => setRole(LURKER)}
+          >
+            Lurker
+          </Button>
+          <Button
+            disabled={onlyBrute}
+            highlighted={role === RANGED}
+            onClick={() => setRole(RANGED)}
+          >
+            Ranged
+          </Button>
+          <Button
+            disabled={onlyBrute}
+            highlighted={role === SWARM}
+            onClick={() => setRole(SWARM)}
+          >
+            Swarm
+          </Button>
+          <Button
+            disabled={onlyBrute}
+            highlighted={role === PSYCHIC}
+            onClick={() => setRole(PSYCHIC)}
+          >
+            Psychic
+          </Button>
+        </ButtonGroup>
         <Button
-          highlighted={difficulty === EASY}
-          onClick={() => setDifficulty(EASY)}
+          onClick={() => {
+            onGenerateStart({
+              crewCount,
+              difficulty,
+              role,
+              type,
+            });
+            setIsModalOpen(false);
+          }}
         >
-          Easy
+          GENERATE CREATURE LIST
         </Button>
-        <Button
-          highlighted={difficulty === STANDARD}
-          onClick={() => setDifficulty(STANDARD)}
-        >
-          Standard
-        </Button>
-        <Button
-          highlighted={difficulty === ELITE}
-          onClick={() => setDifficulty(ELITE)}
-        >
-          Elite
-        </Button>
-        <Button
-          highlighted={difficulty === OVERWHELMING}
-          onClick={() => setDifficulty(OVERWHELMING)}
-        >
-          Overwhelming
-        </Button>
-      </ButtonGroup>
-      <ButtonGroup title="Creature type">
-        <Button
-          highlighted={type === ABBERATION}
-          onClick={() => setType(ABBERATION)}
-        >
-          Abberation
-        </Button>
-        <Button
-          highlighted={type === SYNTHETIC}
-          onClick={() => setType(SYNTHETIC)}
-        >
-          Synthetic
-        </Button>
-        <Button
-          highlighted={type === LOCAL_FAUNA}
-          onClick={() => setType(LOCAL_FAUNA)}
-        >
-          Local Fauna
-        </Button>
-      </ButtonGroup>
-      <ButtonGroup title="Creature role">
-        <Button highlighted={role === BRUTE} onClick={() => setRole(BRUTE)}>
-          Brute
-        </Button>
-        <Button
-          disabled={onlyBrute}
-          highlighted={role === LURKER}
-          onClick={() => setRole(LURKER)}
-        >
-          Lurker
-        </Button>
-        <Button
-          disabled={onlyBrute}
-          highlighted={role === RANGED}
-          onClick={() => setRole(RANGED)}
-        >
-          Ranged
-        </Button>
-        <Button
-          disabled={onlyBrute}
-          highlighted={role === SWARM}
-          onClick={() => setRole(SWARM)}
-        >
-          Swarm
-        </Button>
-        <Button
-          disabled={onlyBrute}
-          highlighted={role === PSYCHIC}
-          onClick={() => setRole(PSYCHIC)}
-        >
-          Psychic
-        </Button>
-      </ButtonGroup>
-      <Button
-        onClick={() =>
-          onGenerateStart({
-            crewCount,
-            difficulty,
-            role,
-            type,
-          })
-        }
-      >
-        GENERATE CREATURE
-      </Button>
-    </Modal>
+      </Modal>
+    </>
   );
 };

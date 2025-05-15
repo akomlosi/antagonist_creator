@@ -1,7 +1,15 @@
-import { Hex } from "../hex/hex";
-
-export const Modal = ({ children }) => (
-  <div>
-    <div className="generic-ui-modal">{children}</div>
-  </div>
-);
+export const Modal = ({ children, isOpen, onClose = () => {} }) => {
+  if (!isOpen) {
+    return null;
+  }
+  return (
+    <div>
+      <div className="generic-ui-modal">
+        <div className="generic-ui-modal-close" onClick={onClose}>
+          close
+        </div>
+        {children}
+      </div>
+    </div>
+  );
+};
