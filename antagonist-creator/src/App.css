@@ -265,14 +265,24 @@ div {
 
   .generic-ui-modal {
         position: absolute;
-    z-index: 1;
-    background: #00000030;
+    z-index: 2;
+    background: #00000080;
     padding: 50px;
     margin: auto;
     left: 25%;
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(4px);
     width: 50%;
-    border: 1px solid #59b3b7;
+    border: 1px dashed #59b3b71f;
+  }
+
+  .generic-ui-modal-backdrop {
+      width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    backdrop-filter: blur(8px);
   }
 
   .generic-ui-modal-close {

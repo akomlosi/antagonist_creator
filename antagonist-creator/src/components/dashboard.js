@@ -11,7 +11,7 @@ import { Button } from "./generic-ui/button/button";
 import { ButtonGroup } from "./generic-ui/button-group/button-group";
 import { Modal } from "./generic-ui/modal/modal";
 
-const { GUARDIAN, ABBERATION, SYNTHETIC, LOCAL_FAUNA } = CREATURE_TYPE;
+const { ABBERATION, SYNTHETIC, LOCAL_FAUNA } = CREATURE_TYPE;
 const { BRUTE, LURKER, PSYCHIC, RANGED, SWARM } = ROLES;
 
 export const Dashboard = ({ onGenerateStart }) => {

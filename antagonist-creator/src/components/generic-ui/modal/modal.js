@@ -4,6 +4,7 @@ export const Modal = ({ children, isOpen, onClose = () => {} }) => {
   }
   return (
     <div>
+      <div className="generic-ui-modal-backdrop" />
       <div className="generic-ui-modal">
         <div className="generic-ui-modal-close" onClick={onClose}>
           close
