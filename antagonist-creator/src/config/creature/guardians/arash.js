@@ -1,4 +1,5 @@
 import { EASY, ELITE, OVERWHELMING, STANDARD } from "../../difficulty.config";
+import { APPEARANCE } from "../defaults/appearance";
 
 export const arash = {
   [EASY]: {
@@ -34,6 +35,7 @@ export const arash = {
     roleProperties: [
       "The Arash skips its turn but adds +10 to its next attack skill.",
     ],
+    appearance: APPEARANCE.HUMANOID
   },
   [ELITE]: {
     STR: 12,
@@ -53,6 +55,7 @@ export const arash = {
       "The Arash skips its turn but adds +10 to its next attack skill.",
       "The Arash launches an explosive round that deals D20 damage.",
     ],
+    appearance: APPEARANCE.HUMANOID
   },
   [OVERWHELMING]: {
     STR: 12,
@@ -73,5 +76,6 @@ export const arash = {
       "The Arash launches an explosive round that deals D20 damage.",
       "Can initiate attack 2 times/round",
     ],
+    appearance: APPEARANCE.HUMANOID
   },
 };

@@ -1,4 +1,5 @@
 import { EASY, ELITE, OVERWHELMING, STANDARD } from "../../difficulty.config";
+import { APPEARANCE } from "../defaults/appearance";
 
 export const titan = {
   [EASY]: {
@@ -16,6 +17,7 @@ export const titan = {
     defense: 0,
     abilities: [],
     roleProperties: [],
+    appearance: APPEARANCE.HUMANOID
   },
   [STANDARD]: {
     STR: 12,
@@ -34,6 +36,7 @@ export const titan = {
     roleProperties: [
       "+1 damage to its next attack per attack received. Resets after dealing damage.",
     ],
+    appearance: APPEARANCE.HUMANOID
   },
   [ELITE]: {
     STR: 14,
@@ -52,6 +55,7 @@ export const titan = {
     roleProperties: [
       "+1 damage to its next attack per attack received. Resets after dealing damage.",
     ],
+    appearance: APPEARANCE.HUMANOID
   },
   [OVERWHELMING]: {
     STR: 16,
@@ -74,5 +78,6 @@ export const titan = {
     roleProperties: [
       "+1 damage to its next attack per attack received. Resets after dealing damage.",
     ],
+    appearance: APPEARANCE.HUMANOID
   },
 };

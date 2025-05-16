@@ -1,4 +1,5 @@
 import { EASY, ELITE, OVERWHELMING, STANDARD } from "../../difficulty.config";
+import { APPEARANCE } from "../defaults/appearance";
 
 export const brahmari = {
   [EASY]: {
@@ -15,7 +16,8 @@ export const brahmari = {
     armor: 0,
     defense: 0,
     abilities: [],
-    roleProperties: ["Can initiate attach 2 times/round"],
+    roleProperties: ["Can initiate attack 2 times/round"],
+    appearance: APPEARANCE.QUADRUPED
   },
   [STANDARD]: {
     STR: 11,
@@ -33,8 +35,9 @@ export const brahmari = {
     abilities: ["Radiation"],
     roleProperties: [
       "Every round spent near a Brahmari swarm inflicts 1D20 rads.",
-      "Can initiate attach 2 times/round",
+      "Can initiate attack 2 times/round",
     ],
+    appearance: APPEARANCE.QUADRUPED
   },
   [ELITE]: {
     STR: 12,
@@ -52,8 +55,9 @@ export const brahmari = {
     abilities: ["Radiation"],
     roleProperties: [
       "Every round spent near a Brahmari swarm inflicts 2D20 rads.",
-      "Can initiate attach 2 times/round",
+      "Can initiate attack 2 times/round",
     ],
+    appearance: APPEARANCE.QUADRUPED
   },
   [OVERWHELMING]: {
     STR: 12,
@@ -71,7 +75,8 @@ export const brahmari = {
     abilities: ["Radiation"],
     roleProperties: [
       "Every round spent near a Brahmari swarm inflicts 3D20 rads.",
-      "Can initiate attach 2 times/round",
+      "Can initiate attack 2 times/round",
     ],
+    appearance: APPEARANCE.QUADRUPED
   },
 };

@@ -76,19 +76,15 @@ export const Guardiansheet = ({ creatureConfig }) => {
         </div>
         <div>
           <span className="chevron-right">Damage</span>
-          <span className="text_highlighted">
-            {creatureConfig.damage}+{creatureConfig.damageMod}
-          </span>
+          <span className="text_highlighted">{creatureConfig.damage}</span>
         </div>
       </BracketedBox>
-      <div>
-        <span className="chevron-right"> Range (if applicable)</span>
-        <span className="text_highlighted">{creatureConfig.range}</span>
-      </div>
-      <div>
-        <span className="chevron-right">abilities</span>
-        <span className="danger">{creatureConfig.abilities.join(", ")}</span>
-      </div>
+      {creatureConfig.abilities.length > 0 && (
+        <div>
+          <span className="chevron-right">abilities</span>
+          <span className="danger">{creatureConfig.abilities.join(", ")}</span>
+        </div>
+      )}
       {creatureConfig.recovery && (
         <div>
           <div className="chevron-down">Recovery reactions</div>
@@ -121,17 +117,15 @@ export const Guardiansheet = ({ creatureConfig }) => {
         <span className="neutral">{creatureConfig.appearance}</span>
       </div>
 
-      <BracketedBox title={"Enemy role"}>
-        {creatureConfig.roleProperties.map((p, i) => (
-          <span className="angle-right" key={`${p}-${i}`}>
-            {p}
-          </span>
-        ))}
-      </BracketedBox>
-      <div>
-        <span className="chevron-right">Size</span>
-        <span className="neutral">{creatureConfig.size}</span>
-      </div>
+      {creatureConfig.roleProperties.length > 0 && (
+        <BracketedBox title={"Enemy role"}>
+          {creatureConfig.roleProperties.map((p, i) => (
+            <span className="angle-right" key={`${p}-${i}`}>
+              {p}
+            </span>
+          ))}
+        </BracketedBox>
+      )}
     </article>
   );
 };
