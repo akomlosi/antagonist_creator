@@ -162,7 +162,7 @@ export const encounterDifficulty = {
       [STANDARD, STANDARD, STANDARD],
       [EASY, EASY, STANDARD, STANDARD],
       [EASY, EASY, EASY, EASY, STANDARD],
-      [EASY, EASY, EASY, EASY, EASY, EASY],
+      [...Array(6).fill(EASY)],
       [ELITE, EASY, EASY],
     ],
     [ELITE]: [],

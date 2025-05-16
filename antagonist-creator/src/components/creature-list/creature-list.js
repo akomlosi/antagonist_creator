@@ -1,10 +1,10 @@
 import { encounterDifficulty } from "@config/difficulty.config";
 import { generate } from "@utils/antagonist-generator";
 import { rand } from "@utils/array-randomizer";
-import { generateRandomCreatureName } from "@utils/generators/name-generator";
 import { clearAll, read, save } from "@utils/local-storage";
 import { CreatureSheet } from "@components/creature-sheet/creature-sheet";
 import { useCallback, useEffect, useState } from "react";
+import { CreatureListHeader } from "@components/creature-list-header/creature-list-header";
 
 export const CreatureList = ({ difficulty, crewCount, type, role }) => {
   const [creatureConfigs, setCreatureConfigs] = useState([]);
@@ -54,7 +54,7 @@ export const CreatureList = ({ difficulty, crewCount, type, role }) => {
     if (creatures.length) {
       setCreatureConfigs(creatures);
     }
-  }, [crewCount]);
+  }, [crewCount, difficulty, type, role]);
 
   useEffect(() => {
     const storedData = read();
@@ -65,9 +65,7 @@ export const CreatureList = ({ difficulty, crewCount, type, role }) => {
 
   return (
     <>
-      <span className="neutral">"{generateRandomCreatureName()}" | </span>
-      <span className="neutral">{type} | </span>
-      <span className="neutral">{role}</span>
+      <CreatureListHeader type={type} role={role} />
       <div className="list">
         {creatureConfigs.map((creatureConfig, i) => {
           return (

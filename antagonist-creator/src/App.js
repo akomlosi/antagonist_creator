@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./App.css";
 import Header, { HEADER_BUTTONS } from "./components/header/header";
 import { UniqueEncounterModal } from "./components/modal/unique-encounter/unique-encounter.modal";
@@ -12,9 +12,16 @@ function App() {
   const [isUniqueEncounterModalOpen, setIsUniqueEncounterModalOpen] = useState(false);
   const [isGuardiansModalOpen, setGuardiansModalOpen] = useState(false);
 
+  const handleGuardiansGenerate = useCallback((userConfig) => {
+    setGuardiansConfig(userConfig);
+    setIsUniqueEncounterModalOpen(false);
+    setUniqueEncounterUserConfig({});
+  }, []);
+
   const handleUniqueEncouterGenerate = useCallback((userConfig) => {
     setUniqueEncounterUserConfig(userConfig);
     setIsUniqueEncounterModalOpen(false);
+    setGuardiansConfig({});
   }, []);
 
   const handleMenuButtonClick = useCallback((button) => {
@@ -36,7 +43,7 @@ function App() {
     <div className="App">
       <Header onMenuButtonClick={handleMenuButtonClick} />
       <UniqueEncounterModal onClose={() => setIsUniqueEncounterModalOpen(false)} isOpen={isUniqueEncounterModalOpen} onGenerateStart={handleUniqueEncouterGenerate} />
-      <GuardiansModal onClose={() => setGuardiansModalOpen(false)} isOpen={isGuardiansModalOpen} onGenerateStart={setGuardiansConfig} />
+      <GuardiansModal onClose={() => setGuardiansModalOpen(false)} isOpen={isGuardiansModalOpen} onGenerateStart={handleGuardiansGenerate} />
       {Object.keys(uniqueEncounterUserConfig).length && (
         <CreatureList
           crewCount={uniqueEncounterUserConfig.crewCount}
