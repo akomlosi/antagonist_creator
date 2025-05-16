@@ -1,4 +1,4 @@
-import { Hex } from "./generic-ui/hex/hex";
+import { Hex } from "@components/generic-ui/hex/hex";
 
 const BracketedBox = ({ title, children }) => (
   <>

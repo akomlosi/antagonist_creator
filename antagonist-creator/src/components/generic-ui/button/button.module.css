@@ -1,0 +1,16 @@
+  .button {
+    background: none;
+    border: 1px solid #59b3b7;
+    padding: 12px;
+    text-transform: uppercase;
+    color: #59b3b7;
+     font-family: monospace;
+     cursor: pointer;
+  }
+  .highlighted {
+    color: #fff570;
+  }
+
+  .button:disabled {
+    opacity: .3;
+  }

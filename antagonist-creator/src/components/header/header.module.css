@@ -1,0 +1,20 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    color: white;
+}
+
+.headerLogo {
+    background: url('../../assets/atdw_logo.webp') no-repeat center center;
+    width: 250px;
+    height: 50px;
+    background-size: contain;
+    filter: invert(1);
+}
+
+.headerMenuButtonsContainer {
+    display: flex;
+    gap: 20px;
+}

@@ -1,10 +1,10 @@
-import { encounterDifficulty } from "../config/difficulty.config";
-import { generate } from "../utils/antagonist-generator";
-import { rand } from "../utils/array-randomizer";
-import { generateRandomCreatureName } from "../utils/generators/name-generator";
-import { clearAll, read, save } from "../utils/local-storage";
-import { CreatureSheet } from "./creature-sheet";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { encounterDifficulty } from "@config/difficulty.config";
+import { generate } from "@utils/antagonist-generator";
+import { rand } from "@utils/array-randomizer";
+import { generateRandomCreatureName } from "@utils/generators/name-generator";
+import { clearAll, read, save } from "@utils/local-storage";
+import { CreatureSheet } from "@components/creature-sheet/creature-sheet";
+import { useCallback, useEffect, useState } from "react";
 
 export const CreatureList = ({ difficulty, crewCount, type, role }) => {
   const [creatureConfigs, setCreatureConfigs] = useState([]);

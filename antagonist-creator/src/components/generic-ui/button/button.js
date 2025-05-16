@@ -1,3 +1,5 @@
+import styles from "./button.module.css";
+
 export const Button = ({
   children,
   onClick,
@@ -7,7 +9,7 @@ export const Button = ({
   <button
     type="button"
     disabled={disabled}
-    className={`generic-ui-button ${highlighted && "highlighted"}`}
+    className={`${styles.button} ${highlighted && styles.highlighted}`}
     onClick={onClick}
   >
     {children}

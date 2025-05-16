@@ -1,34 +1,26 @@
 import { useState } from "react";
-import {
-  EASY,
-  ELITE,
-  OVERWHELMING,
-  STANDARD,
-} from "../config/difficulty.config";
-import { CREATURE_TYPE } from "../config/creature/defaults/types";
-import { ROLES } from "../config/creature/defaults/roles";
-import { Button } from "./generic-ui/button/button";
-import { ButtonGroup } from "./generic-ui/button-group/button-group";
-import { Modal } from "./generic-ui/modal/modal";
+
+import { CREATURE_TYPE } from "../../../config/creature/defaults/types";
+import { ROLES } from "../../../config/creature/defaults/roles";
+import { Button } from "../../generic-ui/button/button";
+import { ButtonGroup } from "../../generic-ui/button-group/button-group";
+import { Modal } from "../../generic-ui/modal/modal";
+import { EASY, STANDARD, ELITE, OVERWHELMING } from "../../../config/difficulty.config";
 
 const { ABBERATION, SYNTHETIC, LOCAL_FAUNA } = CREATURE_TYPE;
 const { BRUTE, LURKER, PSYCHIC, RANGED, SWARM } = ROLES;
 
-export const Dashboard = ({ onGenerateStart }) => {
+export const UniqueEncounterModal = ({ isOpen, onClose = () => {}, onGenerateStart }) => {
   const [crewCount, setCrewCount] = useState(1);
   const [difficulty, setDifficulty] = useState(EASY);
   const [type, setType] = useState(ABBERATION);
   const [role, setRole] = useState(BRUTE);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const onlyBrute = parseInt(crewCount, 10) === 1 && difficulty === EASY;
 
   return (
     <>
-      {!isModalOpen && (
-        <Button onClick={() => setIsModalOpen(true)}>Open Dashboard</Button>
-      )}
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+      <Modal isOpen={isOpen} onClose={onClose}>
         <ButtonGroup title="Crew count">
           <Button highlighted={crewCount === 1} onClick={() => setCrewCount(1)}>
             One-member crew
@@ -127,7 +119,7 @@ export const Dashboard = ({ onGenerateStart }) => {
               role,
               type,
             });
-            setIsModalOpen(false);
+            onClose();
           }}
         >
           GENERATE CREATURE LIST
