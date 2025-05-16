@@ -4,6 +4,7 @@ import Header, { HEADER_BUTTONS } from "./components/header/header";
 import { UniqueEncounterModal } from "./components/modal/unique-encounter/unique-encounter.modal";
 import { GuardiansModal } from "./components/modal/guardians/guardians.modal";
 import { CreatureList } from "./components/creature-list/creature-list";
+import GuardiansList from "@components/guardians-list/guardians-list";
 
 function App() {
   const [uniqueEncounterUserConfig, setUniqueEncounterUserConfig] = useState({});
@@ -44,7 +45,10 @@ function App() {
           type={uniqueEncounterUserConfig.type}
         />
       )}
-    </div>
+      {Object.keys(guardiansConfig).length && (
+        <GuardiansList difficulty={guardiansConfig.difficulty} crewCount={guardiansConfig.crewCount} />
+      )}
+      </div>
   );
 }
 

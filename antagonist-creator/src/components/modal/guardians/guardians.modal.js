@@ -1,22 +1,29 @@
 import { useState } from "react";
 
-import { CREATURE_TYPE } from "../../../config/creature/defaults/types";
-import { ROLES } from "../../../config/creature/defaults/roles";
 import { Button } from "../../generic-ui/button/button";
 import { ButtonGroup } from "../../generic-ui/button-group/button-group";
 import { Modal } from "../../generic-ui/modal/modal";
 import { EASY, STANDARD, ELITE, OVERWHELMING } from "../../../config/difficulty.config";
 
-const { ABBERATION, SYNTHETIC, LOCAL_FAUNA } = CREATURE_TYPE;
-const { BRUTE, LURKER, PSYCHIC, RANGED, SWARM } = ROLES;
-
 export const GuardiansModal = ({ isOpen, onClose = () => {}, onGenerateStart }) => {
   const [difficulty, setDifficulty] = useState(EASY);
+  const [crewCount, setCrewCount] = useState(1);
 
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
 
+        <ButtonGroup title="Crew count">
+          <Button highlighted={crewCount === 1} onClick={() => setCrewCount(1)}>
+            One-member crew
+          </Button>
+          <Button highlighted={crewCount === 3} onClick={() => setCrewCount(3)}>
+            Three-member crew
+          </Button>
+          <Button highlighted={crewCount === 5} onClick={() => setCrewCount(5)}>
+            Five-member crew
+          </Button>
+        </ButtonGroup>
         <ButtonGroup title="Difficulty">
           <Button
             highlighted={difficulty === EASY}
@@ -47,7 +54,8 @@ export const GuardiansModal = ({ isOpen, onClose = () => {}, onGenerateStart }) 
         <Button
           onClick={() => {
             onGenerateStart({
-              difficulty
+              difficulty,
+              crewCount
             });
             onClose();
           }}
