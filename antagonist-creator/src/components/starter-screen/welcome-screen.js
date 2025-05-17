@@ -1,4 +1,4 @@
-import style from './starter-screen.module.css';
+import style from './welcome-screen.module.css';
 
 export const WelcomeScreen = () => {
 
