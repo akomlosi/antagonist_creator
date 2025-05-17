@@ -6,6 +6,7 @@ import { GuardiansModal } from "@components/modal/guardians/guardians.modal";
 import { CreatureList } from "@components/creature-list/creature-list";
 import GuardiansList from "@components/guardians-list/guardians-list";
 import { AboutModal } from "@components/modal/about/about.modal";
+import { WelcomeScreen } from "@components/starter-screen/welcome-screen";
 
 function App() {
   const [uniqueEncounterUserConfig, setUniqueEncounterUserConfig] = useState(
@@ -82,6 +83,10 @@ function App() {
             crewCount={guardiansConfig.crewCount}
           />
         )}
+        {!Object.keys(uniqueEncounterUserConfig).length &&
+          !Object.keys(guardiansConfig).length && (
+            <WelcomeScreen />
+          )}
       </div>
     </div>
   );
