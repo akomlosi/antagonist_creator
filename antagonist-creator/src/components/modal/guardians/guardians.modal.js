@@ -3,16 +3,25 @@ import { useState } from "react";
 import { Button } from "../../generic-ui/button/button";
 import { ButtonGroup } from "../../generic-ui/button-group/button-group";
 import { Modal } from "../../generic-ui/modal/modal";
-import { EASY, STANDARD, ELITE, OVERWHELMING } from "../../../config/difficulty.config";
+import {
+  EASY,
+  STANDARD,
+  ELITE,
+  OVERWHELMING,
+} from "../../../config/difficulty.config";
+import style from "./guardians.modal.module.css";
 
-export const GuardiansModal = ({ isOpen, onClose = () => {}, onGenerateStart }) => {
+export const GuardiansModal = ({
+  isOpen,
+  onClose = () => {},
+  onGenerateStart,
+}) => {
   const [difficulty, setDifficulty] = useState(EASY);
   const [crewCount, setCrewCount] = useState(1);
 
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
-
         <ButtonGroup title="Crew count">
           <Button highlighted={crewCount === 1} onClick={() => setCrewCount(1)}>
             One-member crew
@@ -50,12 +59,13 @@ export const GuardiansModal = ({ isOpen, onClose = () => {}, onGenerateStart }) 
             Overwhelming
           </Button>
         </ButtonGroup>
-        
+
         <Button
+          className={style.generateButton}
           onClick={() => {
             onGenerateStart({
               difficulty,
-              crewCount
+              crewCount,
             });
             onClose();
           }}

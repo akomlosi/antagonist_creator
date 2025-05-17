@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import "./App.css";
-import Header, { HEADER_BUTTONS } from "./components/header/header";
-import { UniqueEncounterModal } from "./components/modal/unique-encounter/unique-encounter.modal";
-import { GuardiansModal } from "./components/modal/guardians/guardians.modal";
-import { CreatureList } from "./components/creature-list/creature-list";
+import Header, { HEADER_BUTTONS } from "@components/header/header";
+import { UniqueEncounterModal } from "@components/modal/unique-encounter/unique-encounter.modal";
+import { GuardiansModal } from "@components/modal/guardians/guardians.modal";
+import { CreatureList } from "@components/creature-list/creature-list";
 import GuardiansList from "@components/guardians-list/guardians-list";
 
 function App() {
@@ -28,6 +28,8 @@ function App() {
   }, []);
 
   const handleMenuButtonClick = useCallback((button) => {
+    setIsUniqueEncounterModalOpen(false);
+    setGuardiansModalOpen(false);
     switch (button) {
       case HEADER_BUTTONS.UNIQUE:
         setIsUniqueEncounterModalOpen(true);

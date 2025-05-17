@@ -1,16 +1,21 @@
 import { useState } from "react";
 
-import { CREATURE_TYPE } from "../../../config/creature/defaults/types";
-import { ROLES } from "../../../config/creature/defaults/roles";
-import { Button } from "../../generic-ui/button/button";
-import { ButtonGroup } from "../../generic-ui/button-group/button-group";
-import { Modal } from "../../generic-ui/modal/modal";
-import { EASY, STANDARD, ELITE, OVERWHELMING } from "../../../config/difficulty.config";
+import { CREATURE_TYPE } from "@config/creature/defaults/types";
+import { ROLES } from "@config/creature/defaults/roles";
+import { Button } from "@components/generic-ui/button/button";
+import { ButtonGroup } from "@components/generic-ui/button-group/button-group";
+import { Modal } from "@components/generic-ui/modal/modal";
+import { EASY, STANDARD, ELITE, OVERWHELMING } from "@config/difficulty.config";
+import style from "./unique-encounter.modal.module.css";
 
 const { ABBERATION, SYNTHETIC, LOCAL_FAUNA } = CREATURE_TYPE;
 const { BRUTE, LURKER, PSYCHIC, RANGED, SWARM } = ROLES;
 
-export const UniqueEncounterModal = ({ isOpen, onClose = () => {}, onGenerateStart }) => {
+export const UniqueEncounterModal = ({
+  isOpen,
+  onClose = () => {},
+  onGenerateStart,
+}) => {
   const [crewCount, setCrewCount] = useState(1);
   const [difficulty, setDifficulty] = useState(EASY);
   const [type, setType] = useState(ABBERATION);
@@ -112,6 +117,7 @@ export const UniqueEncounterModal = ({ isOpen, onClose = () => {}, onGenerateSta
           </Button>
         </ButtonGroup>
         <Button
+          className={style.generateButton}
           onClick={() => {
             onGenerateStart({
               crewCount,

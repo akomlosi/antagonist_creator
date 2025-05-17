@@ -14,7 +14,7 @@ const VIEW_TYPES = {
   EXPANDED: "expanded",
 };
 
-const currentView = VIEW_TYPES.COMPACT;
+const currentView = VIEW_TYPES.EXPANDED;
 
 export const CreatureSheet = ({ creatureConfig }) => {
   return (
