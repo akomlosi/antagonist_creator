@@ -1,0 +1,8 @@
+.aboutModal {
+    color: #59b3b7;
+}
+
+.aboutModal a, .aboutModal strong {
+    color: #fff570;
+    text-decoration: none;
+}

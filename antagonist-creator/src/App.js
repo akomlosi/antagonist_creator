@@ -5,6 +5,7 @@ import { UniqueEncounterModal } from "@components/modal/unique-encounter/unique-
 import { GuardiansModal } from "@components/modal/guardians/guardians.modal";
 import { CreatureList } from "@components/creature-list/creature-list";
 import GuardiansList from "@components/guardians-list/guardians-list";
+import { AboutModal } from "@components/modal/about/about.modal";
 
 function App() {
   const [uniqueEncounterUserConfig, setUniqueEncounterUserConfig] = useState(
@@ -14,6 +15,7 @@ function App() {
   const [isUniqueEncounterModalOpen, setIsUniqueEncounterModalOpen] =
     useState(false);
   const [isGuardiansModalOpen, setGuardiansModalOpen] = useState(false);
+  const [isAboutModalOpen, setAboutModalOpen] = useState(false);
 
   const handleGuardiansGenerate = useCallback((userConfig) => {
     setGuardiansConfig(userConfig);
@@ -39,6 +41,9 @@ function App() {
         break;
       case HEADER_BUTTONS.KNOWN_THREATS:
         break;
+      case HEADER_BUTTONS.ABOUT:
+        setAboutModalOpen(true);
+        break;
       default:
         break;
     }
@@ -58,6 +63,11 @@ function App() {
           isOpen={isGuardiansModalOpen}
           onGenerateStart={handleGuardiansGenerate}
         />
+        <AboutModal
+          onClose={() => setAboutModalOpen(false)}
+          isOpen={isAboutModalOpen}
+        />
+
         {Object.keys(uniqueEncounterUserConfig).length && (
           <CreatureList
             crewCount={uniqueEncounterUserConfig.crewCount}

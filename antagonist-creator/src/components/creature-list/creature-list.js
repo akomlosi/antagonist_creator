@@ -76,7 +76,7 @@ export const CreatureList = ({ difficulty, crewCount, type, role }) => {
           );
         })}
       </div>
-      <div className="bottom_container">
+      <div className="bottom_container" style={{ display: "none" }}>
         <button
           onClick={handleRegenerateClick}
           className="custom_button danger"
@@ -95,7 +95,7 @@ export const CreatureList = ({ difficulty, crewCount, type, role }) => {
         >
           [clear storage]
         </button>
-        <div>
+        <div style={{ display: "none" }}>
           {Object.keys(storedCreatureLists).map((entry, i) => (
             <button
               key={`entry-${i}`}

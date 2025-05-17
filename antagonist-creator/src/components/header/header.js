@@ -5,6 +5,7 @@ export const HEADER_BUTTONS = {
   UNIQUE: "unique",
   GUARDIANS: "guardians",
   KNOWN_THREATS: "known-threats",
+  ABOUT: "about",
 };
 
 const Header = ({ onMenuButtonClick }) => {
@@ -30,6 +31,9 @@ const Header = ({ onMenuButtonClick }) => {
           disabled
         >
           KNOWN THREATS
+        </Button>
+        <Button onClick={() => onMenuButtonClick(HEADER_BUTTONS.ABOUT)}>
+          ABOUT
         </Button>
       </div>
     </div>
