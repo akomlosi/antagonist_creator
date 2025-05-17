@@ -9,6 +9,13 @@ const BracketedBox = ({ title, children }) => (
   </>
 );
 
+const VIEW_TYPES = {
+  COMPACT: "compact",
+  EXPANDED: "expanded",
+};
+
+const currentView = VIEW_TYPES.COMPACT;
+
 export const CreatureSheet = ({ creatureConfig }) => {
   return (
     <article>
@@ -69,69 +76,81 @@ export const CreatureSheet = ({ creatureConfig }) => {
           </div>
         </div>
       </div>
-      <BracketedBox title={"Damage"}>
-        <div>
-          <span className="chevron-right">Attack skill</span>
-          <span className="text_highlighted">{creatureConfig.attackSkill}</span>
-        </div>
-        <div>
-          <span className="chevron-right">Damage</span>
-          <span className="text_highlighted">
-            {creatureConfig.damage}+{creatureConfig.damageMod}
-          </span>
-        </div>
-      </BracketedBox>
-      <div>
-        <span className="chevron-right"> Range (if applicable)</span>
-        <span className="text_highlighted">{creatureConfig.range}</span>
-      </div>
-      <div>
-        <span className="chevron-right">abilities</span>
-        <span className="danger">{creatureConfig.abilities.join(", ")}</span>
-      </div>
-      {creatureConfig.recovery && (
-        <div>
-          <div className="chevron-down">Recovery reactions</div>
-          <div className="space-left">
+      {currentView === VIEW_TYPES.EXPANDED && (
+        <>
+          <BracketedBox title={"Damage"}>
             <div>
-              <span className="danger space-right angle-right">[Bloodied]</span>
-              <span className="neutral">
-                {creatureConfig.recovery.bloodied}
+              <span className="chevron-right">Attack skill</span>
+              <span className="text_highlighted">
+                {creatureConfig.attackSkill}
               </span>
             </div>
             <div>
-              <span className="danger space-right angle-right">[Cornered]</span>
-              <span className="neutral">
-                {creatureConfig.recovery.cornered}
+              <span className="chevron-right">Damage</span>
+              <span className="text_highlighted">
+                {creatureConfig.damage}+{creatureConfig.damageMod}
               </span>
             </div>
-            <div>
-              <span className="danger space-right angle-right">
-                [Overwhelmed]
-              </span>
-              <span className="neutral">
-                {creatureConfig.recovery.overwhelmed}
-              </span>
-            </div>
+          </BracketedBox>
+          <div>
+            <span className="chevron-right"> Range (if applicable)</span>
+            <span className="text_highlighted">{creatureConfig.range}</span>
           </div>
-        </div>
-      )}
-      <div>
-        <span className="chevron-right">Appearance</span>
-        <span className="neutral">{creatureConfig.appearance}</span>
-      </div>
+          <div>
+            <span className="chevron-right">abilities</span>
+            <span className="danger">
+              {creatureConfig.abilities.join(", ")}
+            </span>
+          </div>
+          {creatureConfig.recovery && (
+            <div>
+              <div className="chevron-down">Recovery reactions</div>
+              <div className="space-left">
+                <div>
+                  <span className="danger space-right angle-right">
+                    [Bloodied]
+                  </span>
+                  <span className="neutral">
+                    {creatureConfig.recovery.bloodied}
+                  </span>
+                </div>
+                <div>
+                  <span className="danger space-right angle-right">
+                    [Cornered]
+                  </span>
+                  <span className="neutral">
+                    {creatureConfig.recovery.cornered}
+                  </span>
+                </div>
+                <div>
+                  <span className="danger space-right angle-right">
+                    [Overwhelmed]
+                  </span>
+                  <span className="neutral">
+                    {creatureConfig.recovery.overwhelmed}
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
+          <div>
+            <span className="chevron-right">Appearance</span>
+            <span className="neutral">{creatureConfig.appearance}</span>
+          </div>
 
-      <BracketedBox title={"Enemy role"}>
-        {creatureConfig.roleProperties.map((p, i) => (
-          <span className="angle-right" key={`${p}-${i}`}>
-            {p}
-          </span>
-        ))}
-      </BracketedBox>
-      <div>
-        <span className="chevron-right">Size</span>
-        <span className="neutral">{creatureConfig.size}</span>
-      </div>
+          <BracketedBox title={"Enemy role"}>
+            {creatureConfig.roleProperties.map((p, i) => (
+              <span className="angle-right" key={`${p}-${i}`}>
+                {p}
+              </span>
+            ))}
+          </BracketedBox>
+          <div>
+            <span className="chevron-right">Size</span>
+            <span className="neutral">{creatureConfig.size}</span>
+          </div>
+        </>
+      )}
     </article>
   );
 };

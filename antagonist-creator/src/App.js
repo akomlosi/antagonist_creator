@@ -7,9 +7,12 @@ import { CreatureList } from "./components/creature-list/creature-list";
 import GuardiansList from "@components/guardians-list/guardians-list";
 
 function App() {
-  const [uniqueEncounterUserConfig, setUniqueEncounterUserConfig] = useState({});
-    const [guardiansConfig, setGuardiansConfig] = useState({});
-  const [isUniqueEncounterModalOpen, setIsUniqueEncounterModalOpen] = useState(false);
+  const [uniqueEncounterUserConfig, setUniqueEncounterUserConfig] = useState(
+    {}
+  );
+  const [guardiansConfig, setGuardiansConfig] = useState({});
+  const [isUniqueEncounterModalOpen, setIsUniqueEncounterModalOpen] =
+    useState(false);
   const [isGuardiansModalOpen, setGuardiansModalOpen] = useState(false);
 
   const handleGuardiansGenerate = useCallback((userConfig) => {
@@ -42,20 +45,33 @@ function App() {
   return (
     <div className="App">
       <Header onMenuButtonClick={handleMenuButtonClick} />
-      <UniqueEncounterModal onClose={() => setIsUniqueEncounterModalOpen(false)} isOpen={isUniqueEncounterModalOpen} onGenerateStart={handleUniqueEncouterGenerate} />
-      <GuardiansModal onClose={() => setGuardiansModalOpen(false)} isOpen={isGuardiansModalOpen} onGenerateStart={handleGuardiansGenerate} />
-      {Object.keys(uniqueEncounterUserConfig).length && (
-        <CreatureList
-          crewCount={uniqueEncounterUserConfig.crewCount}
-          difficulty={uniqueEncounterUserConfig.difficulty}
-          role={uniqueEncounterUserConfig.role}
-          type={uniqueEncounterUserConfig.type}
+      <div className="main-content">
+        <UniqueEncounterModal
+          onClose={() => setIsUniqueEncounterModalOpen(false)}
+          isOpen={isUniqueEncounterModalOpen}
+          onGenerateStart={handleUniqueEncouterGenerate}
         />
-      )}
-      {Object.keys(guardiansConfig).length && (
-        <GuardiansList difficulty={guardiansConfig.difficulty} crewCount={guardiansConfig.crewCount} />
-      )}
+        <GuardiansModal
+          onClose={() => setGuardiansModalOpen(false)}
+          isOpen={isGuardiansModalOpen}
+          onGenerateStart={handleGuardiansGenerate}
+        />
+        {Object.keys(uniqueEncounterUserConfig).length && (
+          <CreatureList
+            crewCount={uniqueEncounterUserConfig.crewCount}
+            difficulty={uniqueEncounterUserConfig.difficulty}
+            role={uniqueEncounterUserConfig.role}
+            type={uniqueEncounterUserConfig.type}
+          />
+        )}
+        {Object.keys(guardiansConfig).length && (
+          <GuardiansList
+            difficulty={guardiansConfig.difficulty}
+            crewCount={guardiansConfig.crewCount}
+          />
+        )}
       </div>
+    </div>
   );
 }
 

@@ -1,0 +1,31 @@
+.creatureListHeader {
+    font-size: 1.5rem;
+    color: #59b3b7;
+    border-bottom: 1px dashed rgba(144, 174, 175, 0.3);
+    width: max-content;
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+}
+
+.creatureListHeader h3 {
+    display: inline-block;
+    position: relative;
+    border-right: 2px dashed rgba(144, 174, 175, 0.2);
+    padding: 0 20px;
+    margin: 0;
+}
+
+.creatureListHeader h3:last-child {
+    border-right: none;
+    padding-right: 0;
+}
+
+.creatureListHeader h3 strong {
+    font-weight: 700;
+    position: absolute;
+    top: -15px;
+    font-size: 12px;
+    opacity: .5;
+}

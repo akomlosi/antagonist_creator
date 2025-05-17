@@ -1,20 +1,28 @@
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  color: white;
+  background-color: #00000020;
+  backdrop-filter: blur(4px);
+  border-bottom: 1px solid rgba(144, 174, 175, 0.1);
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+  box-sizing: border-box;
+  min-width: 760px;
 }
 
 .headerLogo {
-    background: url('../../assets/atdw_logo.webp') no-repeat center center;
-    width: 250px;
-    height: 50px;
-    background-size: contain;
-    filter: invert(1);
+  background: url("../../assets/atdw_logo.webp") no-repeat center center;
+  width: 250px;
+  height: 50px;
+  background-size: contain;
+  filter: invert(1);
 }
 
 .headerMenuButtonsContainer {
-    display: flex;
-    gap: 20px;
+  display: flex;
+  gap: 20px;
 }
