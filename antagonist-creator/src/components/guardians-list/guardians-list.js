@@ -10,19 +10,19 @@ const GuardiansList = ({ difficulty, crewCount }) => {
   const [creatureConfigs, setCreatureConfigs] = useState([]);
   const [randomGuardian, setRandomGuardian] = useState({});
 
-  console.log(randomGuardian)
-
   useEffect(() => {
-    const selectedRandomGuardian = rand(guardians)
+    const selectedRandomGuardian = rand(guardians);
     setRandomGuardian(selectedRandomGuardian);
     const selectedDifficulty =
       encounterDifficulty[parseInt(crewCount, 10)][difficulty];
     const randomDifficulty = rand(selectedDifficulty);
     const creatures = [];
 
-    randomDifficulty.map((difficulty) =>
-      creatures.push(selectedRandomGuardian.config[difficulty])
-    );
+    randomDifficulty.map((difficulty) => {
+      const config = selectedRandomGuardian.config[difficulty];
+      config.description = difficulty;
+      return creatures.push(config);
+    });
     if (creatures.length) {
       setCreatureConfigs(creatures);
     }
@@ -30,18 +30,22 @@ const GuardiansList = ({ difficulty, crewCount }) => {
 
   return (
     <>
-    <CreatureListHeader name={randomGuardian.name} type={CREATURE_TYPE.GUARDIAN} role={randomGuardian.role} />
-    <div className="list">
-      {creatureConfigs.map((creature, i) => {
-        return (
-          <Guardiansheet
-          key={`creature-sheet-${i}`}
-          creatureConfig={creature}
-          />
-        );
-      })}
-    </div>
-      </>
+      <CreatureListHeader
+        name={randomGuardian.name}
+        type={CREATURE_TYPE.GUARDIAN}
+        role={randomGuardian.role}
+      />
+      <div className="list">
+        {creatureConfigs.map((creature, i) => {
+          return (
+            <Guardiansheet
+              key={`creature-sheet-${i}`}
+              creatureConfig={creature}
+            />
+          );
+        })}
+      </div>
+    </>
   );
 };
 

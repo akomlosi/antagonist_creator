@@ -17,7 +17,7 @@ export const anansi = {
     defense: 0,
     abilities: [],
     roleProperties: [],
-    appearance: APPEARANCE.QUADRUPED
+    appearance: APPEARANCE.QUADRUPED,
   },
   [STANDARD]: {
     STR: 10,
@@ -36,7 +36,7 @@ export const anansi = {
     roleProperties: [
       "The Anansi shoots a venomous dart, applying the Poisoned IV condition",
     ],
-    appearance: APPEARANCE.QUADRUPED
+    appearance: APPEARANCE.QUADRUPED,
   },
   [ELITE]: {
     STR: 10,
@@ -55,7 +55,7 @@ export const anansi = {
     roleProperties: [
       "The Anansi shoots a venomous dart, applying the Poisoned IV condition",
     ],
-    appearance: APPEARANCE.QUADRUPED
+    appearance: APPEARANCE.QUADRUPED,
   },
   [OVERWHELMING]: {
     STR: 14,
@@ -78,6 +78,6 @@ export const anansi = {
     roleProperties: [
       "The Anansi shoots a venomous dart, applying the Poisoned IV condition",
     ],
-    appearance: APPEARANCE.QUADRUPED
+    appearance: APPEARANCE.QUADRUPED,
   },
 };
