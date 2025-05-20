@@ -1,0 +1,13 @@
+.headerBlock {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.conditionsButton {
+    padding: 4px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+}

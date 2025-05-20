@@ -52,6 +52,7 @@ article {
   border-left: 1px dashed #59b3b71f;
   border-right: 1px dashed #59b3b71f;
   width: 430px;
+  scroll-snap-align: start;
 }
 
 
@@ -245,6 +246,8 @@ article {
 
   .list {
     display: flex;
+      overflow-x: auto;
+  scroll-snap-type: x mandatory;
   }
   
   
