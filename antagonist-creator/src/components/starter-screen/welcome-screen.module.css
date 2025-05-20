@@ -1,6 +1,12 @@
 .welcomeScreen {
     color: #59b3b7;
+    padding: 20px 30px;
+}
+
+@media only screen and (min-width: 820px) {
+  .welcomeScreen {
     padding: 20px 150px;
+  }
 }
 
 .welcomeScreen strong {

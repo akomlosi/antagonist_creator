@@ -1,13 +1,19 @@
 .creatureListHeader {
-    font-size: 1.5rem;
+    font-size: 20px;
     color: #59b3b7;
     border-bottom: 1px dashed rgba(144, 174, 175, 0.3);
     width: max-content;
-    padding-left: 30px;
     padding-top: 30px;
     padding-bottom: 8px;
     margin-bottom: 20px;
 }
+
+  @media only screen and (max-width: 640px) {
+    .creatureListHeader {
+    font-size: 16px;
+    }
+  }
+
 
 .creatureListHeader h3 {
     display: inline-block;

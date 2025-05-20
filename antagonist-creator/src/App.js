@@ -7,6 +7,7 @@ import { CreatureList } from "@components/creature-list/creature-list";
 import GuardiansList from "@components/guardians-list/guardians-list";
 import { AboutModal } from "@components/modal/about/about.modal";
 import { WelcomeScreen } from "@components/starter-screen/welcome-screen";
+import { AppBar, Box, Container, Toolbar } from "@mui/material";
 
 function App() {
   const [uniqueEncounterUserConfig, setUniqueEncounterUserConfig] = useState(
@@ -52,8 +53,11 @@ function App() {
 
   return (
     <div className="App">
-      <Header onMenuButtonClick={handleMenuButtonClick} />
-      <div className="main-content">
+      <AppBar>
+        <Header onMenuButtonClick={handleMenuButtonClick} />
+      </AppBar>
+      <Toolbar sx={{ height: "64px" }} />
+      <Container>
         <UniqueEncounterModal
           onClose={() => setIsUniqueEncounterModalOpen(false)}
           isOpen={isUniqueEncounterModalOpen}
@@ -69,7 +73,7 @@ function App() {
           isOpen={isAboutModalOpen}
         />
 
-        {Object.keys(uniqueEncounterUserConfig).length && (
+        {Object.keys(uniqueEncounterUserConfig).length > 0 && (
           <CreatureList
             crewCount={uniqueEncounterUserConfig.crewCount}
             difficulty={uniqueEncounterUserConfig.difficulty}
@@ -77,17 +81,15 @@ function App() {
             type={uniqueEncounterUserConfig.type}
           />
         )}
-        {Object.keys(guardiansConfig).length && (
+        {Object.keys(guardiansConfig).length > 0 && (
           <GuardiansList
             difficulty={guardiansConfig.difficulty}
             crewCount={guardiansConfig.crewCount}
           />
         )}
         {!Object.keys(uniqueEncounterUserConfig).length &&
-          !Object.keys(guardiansConfig).length && (
-            <WelcomeScreen />
-          )}
-      </div>
+          !Object.keys(guardiansConfig).length && <WelcomeScreen />}
+      </Container>
     </div>
   );
 }

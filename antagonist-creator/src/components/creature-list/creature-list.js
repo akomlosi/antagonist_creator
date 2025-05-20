@@ -5,6 +5,7 @@ import { clearAll, read, save } from "@utils/local-storage";
 import { CreatureSheet } from "@components/creature-sheet/creature-sheet";
 import { useCallback, useEffect, useState } from "react";
 import { CreatureListHeader } from "@components/creature-list-header/creature-list-header";
+import { Container } from "@mui/material";
 
 export const CreatureList = ({ difficulty, crewCount, type, role }) => {
   const [creatureConfigs, setCreatureConfigs] = useState([]);
@@ -66,16 +67,18 @@ export const CreatureList = ({ difficulty, crewCount, type, role }) => {
   return (
     <>
       <CreatureListHeader type={type} role={role} />
-      <div className="list">
-        {creatureConfigs.map((creatureConfig, i) => {
-          return (
-            <CreatureSheet
-              key={`creature-sheet-${i}`}
-              creatureConfig={creatureConfig}
-            />
-          );
-        })}
-      </div>
+      <Container sx={{ overflow: "auto" }}>
+        <div className="list">
+          {creatureConfigs.map((creatureConfig, i) => {
+            return (
+              <CreatureSheet
+                key={`creature-sheet-${i}`}
+                creatureConfig={creatureConfig}
+              />
+            );
+          })}
+        </div>
+      </Container>
       <div className="bottom_container" style={{ display: "none" }}>
         <button
           onClick={handleRegenerateClick}
